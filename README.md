@@ -36,3 +36,7 @@ src/
   hooks/       hooks de React
   types/       contratos da API
 ```
+
+## Mocks
+
+Enquanto a integracao real (FRONT-10) nao entra, as telas consomem mocks em `src/services/auth.mock.ts` e `src/services/titles.mock.ts`. Para trocar pelo backend, basta mudar o import de `./auth.mock` / `./titles.mock` para `./auth.api` / `./titles.api` — as funcoes tem a mesma assinatura.
