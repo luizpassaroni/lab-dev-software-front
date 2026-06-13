@@ -36,6 +36,7 @@ export interface SearchResponse {
   results: SearchResult[];
   page: number;
   totalPages: number;
+  hasMore: boolean;
 }
 
 export interface Provider {

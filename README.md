@@ -34,3 +34,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Serviços: Mock vs Real
+
+O projeto usa mocks para desbloquear o desenvolvimento do front sem depender do back.
+
+Para trocar de mock para real, basta mudar o import — a assinatura é idêntica:
+
+```typescript
+// Mock (padrão durante desenvolvimento)
+import { login } from '@/services/auth.mock';
+
+// Real (quando o back estiver disponível)
+import { login } from '@/services/auth.api';
+```
+
+O mesmo vale para títulos:
+
+```typescript
+// Mock
+import { search, ficha } from '@/services/titles.mock';
+
+// Real
+import { search, ficha } from '@/services/titles.api';
+```
