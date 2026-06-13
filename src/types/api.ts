@@ -29,10 +29,11 @@ export type LoginResponse = {
 
 export type SearchResult = {
   tmdbId: number;
-  tmdbType: "movie" | "tv";
+  tmdbType: "MOVIE" | "TV";
   title: string;
   year: number | null;
   posterUrl: string | null;
+  badge: "Filme" | "Série";
 };
 
 export type SearchResponse = {
@@ -42,10 +43,7 @@ export type SearchResponse = {
   hasMore: boolean;
 };
 
-// Provisorio: o shape final vem da ISSUE-BACK-18 (#26), ainda em definicao no back.
-// Ajustar quando a #26 fechar o contrato de GET /titles/{type}/{id}.
 export type Provider = {
-  providerId: number;
   name: string;
   logoUrl: string | null;
 };
@@ -56,11 +54,24 @@ export type TitleProviders = {
   buy: Provider[];
 };
 
+export type CastMember = {
+  name: string;
+  character: string;
+  profileUrl: string | null;
+};
+
 export type TitleDetail = {
   tmdbId: number;
-  tmdbType: "movie" | "tv";
+  tmdbType: "MOVIE" | "TV";
   title: string;
+  year: number | null;
   overview: string;
   posterUrl: string | null;
+  backdropUrl: string | null;
+  runtime: number | null;
+  seasons: number | null;
+  tmdbRating: number;
+  genres: string[];
+  cast: CastMember[];
   providers: TitleProviders;
 };
