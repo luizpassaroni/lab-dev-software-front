@@ -1,0 +1,14 @@
+"use client";
+
+import type * as React from "react";
+import * as ResizablePrimitive from "react-resizable-panels";
+
+function ResizablePanel({
+  ...props
+}: React.ComponentProps<typeof ResizablePrimitive.Panel>) {
+  return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />;
+}
+
+ResizablePanel.displayName = "ResizablePanel";
+
+export { ResizablePanel };
