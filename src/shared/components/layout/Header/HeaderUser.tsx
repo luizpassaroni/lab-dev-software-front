@@ -1,9 +1,7 @@
-"use client"
+"use client";
 
-import { logout } from "@/modules/auth/actions/logout"
-import type { TAuthUser } from "@/modules/auth/types/TAuthUser"
-import { Avatar, AvatarFallback } from "@shared/components/ui/Avatar"
-import { Button } from "@shared/components/ui/Button"
+import { Avatar, AvatarFallback } from "@shared/components/ui/Avatar";
+import { Button } from "@shared/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,29 +9,31 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@shared/components/ui/DropdownMenu"
-import { LogOutIcon } from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+} from "@shared/components/ui/DropdownMenu";
+import { LogOutIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { logout } from "@/modules/auth/actions/logout";
+import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
 
 type Props = {
-  user: TAuthUser | null
-}
+  user: TAuthUser | null;
+};
 
 const HeaderUser = ({ user }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
 
   if (!user) {
     return (
       <div className="flex shrink-0 items-center gap-2">
         <Button variant="ghost" size="sm" asChild>
-          <Link href="/sign-in">Entrar</Link>
+          <Link href="/login">Entrar</Link>
         </Button>
         <Button size="sm" asChild>
-          <Link href="/sign-up">Cadastrar</Link>
+          <Link href="/cadastro">Cadastrar</Link>
         </Button>
       </div>
-    )
+    );
   }
 
   const initials = user.name
@@ -41,12 +41,12 @@ const HeaderUser = ({ user }: Props) => {
     .slice(0, 2)
     .map((part) => part[0])
     .join("")
-    .toUpperCase()
+    .toUpperCase();
 
   const handleLogout = async () => {
-    await logout()
-    router.refresh()
-  }
+    await logout();
+    router.refresh();
+  };
 
   return (
     <DropdownMenu>
@@ -60,8 +60,12 @@ const HeaderUser = ({ user }: Props) => {
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-1">
-            <span className="font-medium text-sm leading-none">{user.name}</span>
-            <span className="text-muted-foreground text-xs leading-none">{user.email}</span>
+            <span className="font-medium text-sm leading-none">
+              {user.name}
+            </span>
+            <span className="text-muted-foreground text-xs leading-none">
+              {user.email}
+            </span>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -74,9 +78,9 @@ const HeaderUser = ({ user }: Props) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-HeaderUser.displayName = "HeaderUser"
+HeaderUser.displayName = "HeaderUser";
 
-export { HeaderUser }
+export { HeaderUser };
