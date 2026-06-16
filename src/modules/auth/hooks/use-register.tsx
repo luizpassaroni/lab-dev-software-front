@@ -1,12 +1,13 @@
-"use client"
+"use client";
 
-import { useMutation } from "@tanstack/react-query"
-import { register } from "@/modules/auth/actions/register"
-import type { TRegisterPayload } from "@/modules/auth/types/TRegisterPayload"
-import type { TAuthUser } from "@/modules/auth/types/TAuthUser"
+import { useMutation } from "@tanstack/react-query";
+import { registerRequest } from "@/modules/auth/queries/registerRequest";
+import type { TRegisterPayload } from "@/modules/auth/types/TRegisterPayload";
+import type { TRegisterResponse } from "@/modules/auth/types/TRegisterResponse";
+import type { ApiError } from "@/shared/lib/api-error";
 
 export function useRegister() {
-  return useMutation<TAuthUser, Error, TRegisterPayload>({
-    mutationFn: register,
-  })
+  return useMutation<TRegisterResponse, ApiError, TRegisterPayload>({
+    mutationFn: registerRequest,
+  });
 }
