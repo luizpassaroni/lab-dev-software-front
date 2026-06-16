@@ -13,7 +13,6 @@ import {
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { logout } from "@/modules/auth/actions/logout";
 import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
 
 type Props = {
@@ -44,7 +43,7 @@ const HeaderUser = ({ user }: Props) => {
     .toUpperCase();
 
   const handleLogout = async () => {
-    await logout();
+    await fetch("/api/auth/logout", { method: "POST" });
     router.refresh();
   };
 

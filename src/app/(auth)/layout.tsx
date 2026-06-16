@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
-import { getAuthToken } from "@/modules/auth/helpers/getAuthToken";
+import { getSessionToken } from "@/modules/auth/helpers/session";
 
 export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const token = await getAuthToken();
+  const token = await getSessionToken();
 
   if (token) {
     redirect("/");

@@ -1,43 +1,30 @@
+import "server-only";
+
 import { registerUserMock } from "@/modules/auth/queries/register.mock";
 import type { TRegisterPayload } from "@/modules/auth/types/TRegisterPayload";
 import type { TRegisterResponse } from "@/modules/auth/types/TRegisterResponse";
 import { ApiError } from "@/shared/lib/api-error";
+import { isBackendConfigured, nestFetch } from "@/shared/lib/serverApi";
 
 /**
- * Server-to-server call to the Nest API. Runs ONLY inside the BFF route handler
- * — never in the browser — so `INTERNAL_API_KEY` never leaves the server.
- *
- * Until the backend is configured (`API_INTERNAL_URL` + `INTERNAL_API_KEY`),
- * it delegates to the dev mock so the flow works locally.
+ * Server-side register against the Nest API. Returns `{ id, name, email }`,
+ * no session (register does not log the user in — PRD §8.1). Falls back to the
+ * dev mock when the backend is not configured.
  */
 export async function registerUser(
   payload: TRegisterPayload,
 ): Promise<TRegisterResponse> {
-  const baseUrl = process.env.API_INTERNAL_URL;
-  const internalKey = process.env.INTERNAL_API_KEY;
-
-  if (!baseUrl || !internalKey) {
+  if (!isBackendConfigured()) {
     return registerUserMock(payload);
   }
 
-  let response: Response;
-  try {
-    response = await fetch(`${baseUrl}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Internal-Key": internalKey,
-      },
-      body: JSON.stringify(payload),
-    });
-  } catch {
-    // DNS / connection failure reaching the Nest API.
-    throw new ApiError(502, "Não foi possível concluir o cadastro agora.");
-  }
+  const response = await nestFetch("/auth/register", {
+    method: "POST",
+    body: payload,
+  });
 
   if (!response.ok) {
     const data = await response.json().catch(() => null);
-    // Nest (class-validator) may return `message` as a string or string[].
     const raw = data?.message;
     const message = Array.isArray(raw)
       ? raw[0]
