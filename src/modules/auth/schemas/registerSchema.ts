@@ -13,8 +13,8 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const nameSchema = z
   .string()
   .trim()
-  .min(2, "Nome deve ter entre 2 e 60 caracteres")
-  .max(60, "Nome deve ter entre 2 e 60 caracteres");
+  .min(3, "Nome deve ter entre 3 e 50 caracteres")
+  .max(50, "Nome deve ter entre 3 e 50 caracteres");
 
 export const emailSchema = z
   .string()
