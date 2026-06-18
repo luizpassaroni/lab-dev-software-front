@@ -1,0 +1,22 @@
+import { cn } from "@shared/lib/cn";
+import type * as React from "react";
+
+function AlertDialogFooter({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-dialog-footer"
+      className={cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+AlertDialogFooter.displayName = "AlertDialogFooter";
+
+export { AlertDialogFooter };
