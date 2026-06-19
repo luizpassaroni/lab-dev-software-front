@@ -5,7 +5,7 @@ import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
 import { ApiError } from "@/shared/lib/api-error";
 import { isBackendConfigured, nestFetch } from "@/shared/lib/serverApi";
 
-/** Server-side ficha proxy to the Nest API (preserves 404/502). */
+/** Server-side ficha proxy to the Nest API (preserves 400/404/502). */
 export async function getTitleOnNest(
   type: "movie" | "tv",
   id: string,
@@ -17,12 +17,13 @@ export async function getTitleOnNest(
   const response = await nestFetch(`/titles/${type}/${id}`);
 
   if (!response.ok) {
-    throw new ApiError(
-      response.status === 404 ? 404 : 502,
-      response.status === 404
-        ? "Título não encontrado."
-        : "Não foi possível carregar o título.",
-    );
+    if (response.status === 404) {
+      throw new ApiError(404, "Título não encontrado.");
+    }
+    if (response.status === 400) {
+      throw new ApiError(400, "Requisição inválida.");
+    }
+    throw new ApiError(502, "Não foi possível carregar o título.");
   }
 
   return response.json();

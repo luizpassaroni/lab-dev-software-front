@@ -73,9 +73,13 @@ export async function getTitleMock(
     throw new ApiError(404, "Título não encontrado.");
   }
 
+  if (!/^\d+$/.test(id)) {
+    throw new ApiError(400, "Requisição inválida.");
+  }
+
   return {
-    tmdbId: Number(id) || 872585,
-    tmdbType: type,
+    tmdbId: Number(id),
+    tmdbType: type === "movie" ? "MOVIE" : "TV",
     title: type === "movie" ? "Oppenheimer" : "Breaking Bad",
     year: type === "movie" ? 2023 : 2008,
     overview:
@@ -94,7 +98,7 @@ export async function getTitleMock(
       },
     ],
     providers: {
-      flatrate: [{ id: 8, name: "Netflix", logoUrl: null }],
+      flatrate: [{ name: "Netflix", logoUrl: null }],
       rent: [],
       buy: [],
     },
