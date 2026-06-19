@@ -32,7 +32,7 @@ const HeaderSearch = () => {
     const type = result.tmdbType === "MOVIE" ? "movie" : "tv";
 
     setOpen(false);
-    router.push(`/titles/${type}/${result.tmdbId}`);
+    router.push(`/titulo/${type}/${result.tmdbId}`);
   };
 
   return (
