@@ -14,3 +14,8 @@ export class ApiError extends Error {
     this.status = status;
   }
 }
+
+/** Whether an unknown error is an {@link ApiError} carrying a 401 (unauthorized). */
+export function isUnauthorized(error: unknown): boolean {
+  return error instanceof ApiError && error.status === 401;
+}
