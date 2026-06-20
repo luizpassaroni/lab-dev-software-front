@@ -1,6 +1,5 @@
 /** Provider de streaming (BR), normalizado pelo backend para a UI. */
 export type TProvider = {
-  id: number;
   name: string;
   logoUrl: string | null;
 };
@@ -8,7 +7,7 @@ export type TProvider = {
 /** Elenco resumido exibido na ficha. */
 export type TCastMember = {
   name: string;
-  character: string | null;
+  character: string;
   profileUrl: string | null;
 };
 
@@ -18,7 +17,7 @@ export type TCastMember = {
  */
 export type TTitleDetail = {
   tmdbId: number;
-  tmdbType: "movie" | "tv";
+  tmdbType: "MOVIE" | "TV";
   title: string;
   year: number | null;
   overview: string;
@@ -26,7 +25,7 @@ export type TTitleDetail = {
   backdropUrl: string | null;
   runtime: number | null;
   seasons: number | null;
-  tmdbRating: number | null;
+  tmdbRating: number;
   genres: string[];
   cast: TCastMember[];
   providers: {
