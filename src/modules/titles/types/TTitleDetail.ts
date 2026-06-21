@@ -33,4 +33,9 @@ export type TTitleDetail = {
     rent: TProvider[];
     buy: TProvider[];
   };
+  userState?: {
+    rating: number | null;
+    watched: boolean;
+    favorite: boolean;
+  };
 };
