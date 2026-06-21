@@ -1,7 +1,7 @@
 "use client";
 
-import { rateTitle } from "@/modules/titles/queries/rateTitle";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { rateTitle } from "@/modules/titles/queries/rateTitle";
 
 export function useRating(type: string, id: string) {
   const queryClient = useQueryClient();

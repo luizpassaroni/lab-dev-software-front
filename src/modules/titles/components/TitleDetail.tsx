@@ -1,10 +1,5 @@
 "use client";
 
-import { RatingControl } from "@/modules/titles/components/RatingControl";
-import { WatchProviders } from "@/modules/titles/components/WatchProviders";
-import { useTitleDetail } from "@/modules/titles/hooks/useTitleDetail";
-import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
-import { ApiError } from "@/shared/lib/api-error";
 import { Badge } from "@shared/components/ui/Badge";
 import { Button } from "@shared/components/ui/Button";
 import {
@@ -28,6 +23,11 @@ import {
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { RatingControl } from "@/modules/titles/components/RatingControl";
+import { WatchProviders } from "@/modules/titles/components/WatchProviders";
+import { useTitleDetail } from "@/modules/titles/hooks/useTitleDetail";
+import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
+import { ApiError } from "@/shared/lib/api-error";
 
 type Props = {
   type: string;

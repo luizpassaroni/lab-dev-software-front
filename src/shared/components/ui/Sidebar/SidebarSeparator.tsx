@@ -1,8 +1,8 @@
 "use client";
 
-import { Separator } from "@/shared/components/ui/Separator";
 import { cn } from "@shared/lib/cn";
 import type * as React from "react";
+import { Separator } from "@/shared/components/ui/Separator";
 
 function SidebarSeparator({
   className,

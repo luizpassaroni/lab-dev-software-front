@@ -1,8 +1,8 @@
+import { PlayIcon } from "lucide-react";
 import type {
   TProvider,
   TTitleDetail,
 } from "@/modules/titles/types/TTitleDetail";
-import { PlayIcon } from "lucide-react";
 
 const CATEGORIES: {
   key: keyof TTitleDetail["providers"];

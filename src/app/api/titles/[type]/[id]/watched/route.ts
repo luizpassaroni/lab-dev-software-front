@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { getSessionToken } from "@/modules/auth/helpers/session";
 import { nestFetch } from "@/shared/lib/serverApi";
-import { apiErrorResponse, nestResponse } from "../../../../_utils/nest-response";
+import {
+  apiErrorResponse,
+  nestResponse,
+} from "../../../../_utils/nest-response";
 
 type TitleActionContext = RouteContext<"/api/titles/[type]/[id]/watched">;
 

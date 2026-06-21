@@ -1,6 +1,6 @@
-import { type Button, buttonVariants } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import type * as React from "react";
+import { type Button, buttonVariants } from "@/shared/components/ui/Button";
 
 type PaginationLinkProps = {
   isActive?: boolean;

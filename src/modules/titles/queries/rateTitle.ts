@@ -16,7 +16,8 @@ export async function rateTitle(
   try {
     response = await fetch(`/api/titles/${type}/${id}/rating`, {
       method,
-      headers: score === null ? undefined : { "Content-Type": "application/json" },
+      headers:
+        score === null ? undefined : { "Content-Type": "application/json" },
       body,
     });
   } catch {

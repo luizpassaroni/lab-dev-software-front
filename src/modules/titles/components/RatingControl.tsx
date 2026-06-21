@@ -1,11 +1,11 @@
 "use client";
 
-import { useRating } from "@/modules/titles/hooks/useRating";
 import { Button } from "@shared/components/ui/Button";
 import { Slider } from "@shared/components/ui/Slider";
 import { StarIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useRating } from "@/modules/titles/hooks/useRating";
 
 type RatingControlProps = {
   type: string;
@@ -22,8 +22,12 @@ export function RatingControl({
 }: RatingControlProps) {
   const router = useRouter();
   const { mutate, isPending } = useRating(type, id);
-  const [localRating, setLocalRating] = React.useState<number>(initialRating ?? 5);
-  const [hasRating, setHasRating] = React.useState<boolean>(initialRating !== null);
+  const [localRating, setLocalRating] = React.useState<number>(
+    initialRating ?? 5,
+  );
+  const [hasRating, setHasRating] = React.useState<boolean>(
+    initialRating !== null,
+  );
 
   // Sync state if initialRating changes (e.g., after a mutation or data refetch)
   React.useEffect(() => {
@@ -85,7 +89,9 @@ export function RatingControl({
 
         <div className="flex items-center gap-2 text-2xl font-bold text-primary">
           <span>{localRating}</span>
-          <span className="text-muted-foreground text-sm font-normal">/ 10</span>
+          <span className="text-muted-foreground text-sm font-normal">
+            / 10
+          </span>
         </div>
       </div>
 

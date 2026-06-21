@@ -1,14 +1,5 @@
 "use client";
 
-import { ProfileHeader } from "@/modules/profile/components/ProfileHeader";
-import { ProfileList } from "@/modules/profile/components/ProfileList";
-import { ProfileStats } from "@/modules/profile/components/ProfileStats";
-import { useProfile } from "@/modules/profile/hooks/useProfile";
-import {
-  profileItemToSearchResult,
-  ratedItemToSearchResult,
-} from "@/modules/profile/utils/toSearchResult";
-import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
 import { Button } from "@shared/components/ui/Button";
 import {
   Empty,
@@ -20,6 +11,15 @@ import {
 } from "@shared/components/ui/Empty";
 import { Skeleton } from "@shared/components/ui/Skeleton";
 import { RotateCwIcon, TriangleAlertIcon } from "lucide-react";
+import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
+import { ProfileHeader } from "@/modules/profile/components/ProfileHeader";
+import { ProfileList } from "@/modules/profile/components/ProfileList";
+import { ProfileStats } from "@/modules/profile/components/ProfileStats";
+import { useProfile } from "@/modules/profile/hooks/useProfile";
+import {
+  profileItemToSearchResult,
+  ratedItemToSearchResult,
+} from "@/modules/profile/utils/toSearchResult";
 
 type Props = {
   user: TAuthUser;
@@ -47,12 +47,15 @@ export function ProfileContent({ user }: Props) {
               </EmptyMedia>
               <EmptyTitle>Não foi possível carregar</EmptyTitle>
               <EmptyDescription>
-                Ocorreu um erro ao buscar seu perfil. Tente novamente em instantes.
+                Ocorreu um erro ao buscar seu perfil. Tente novamente em
+                instantes.
               </EmptyDescription>
             </EmptyHeader>
             <EmptyContent>
               <Button onClick={() => refetch()} disabled={isFetching}>
-                <RotateCwIcon className={isFetching ? "animate-spin" : undefined} />
+                <RotateCwIcon
+                  className={isFetching ? "animate-spin" : undefined}
+                />
                 Tentar novamente
               </Button>
             </EmptyContent>
