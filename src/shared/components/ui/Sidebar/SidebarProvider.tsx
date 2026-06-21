@@ -1,10 +1,10 @@
 "use client";
 
-import { TooltipProvider } from "@/shared/components/ui/Tooltip";
 import { useIsMobile } from "@shared/hooks/use-mobile";
 import { cn } from "@shared/lib/cn";
 import { setCookie } from "cookies-next";
 import * as React from "react";
+import { TooltipProvider } from "@/shared/components/ui/Tooltip";
 import {
   SIDEBAR_COOKIE_NAME,
   SIDEBAR_KEYBOARD_SHORTCUT,

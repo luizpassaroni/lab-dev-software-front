@@ -23,6 +23,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm exec biome lint .
+      - run: pnpm lint
 
       - run: pnpm build

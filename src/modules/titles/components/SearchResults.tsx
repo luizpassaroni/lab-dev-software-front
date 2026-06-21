@@ -1,7 +1,5 @@
 "use client";
 
-import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid";
-import { useSearchResults } from "@/modules/titles/hooks/useSearchResults";
 import { Button } from "@shared/components/ui/Button";
 import {
   Empty,
@@ -12,11 +10,9 @@ import {
   EmptyTitle,
 } from "@shared/components/ui/Empty";
 import { Skeleton } from "@shared/components/ui/Skeleton";
-import {
-  RotateCwIcon,
-  SearchXIcon,
-  TriangleAlertIcon,
-} from "lucide-react";
+import { RotateCwIcon, SearchXIcon, TriangleAlertIcon } from "lucide-react";
+import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid";
+import { useSearchResults } from "@/modules/titles/hooks/useSearchResults";
 
 type Props = {
   query: string;

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import { ArrowLeft } from "lucide-react";
 import type * as React from "react";
+import { Button } from "@/shared/components/ui/Button";
 import { useCarousel } from "./CarouselContext";
 
 function CarouselPrevious({

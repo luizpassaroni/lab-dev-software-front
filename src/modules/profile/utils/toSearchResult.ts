@@ -1,4 +1,7 @@
-import type { TProfileItem, TRatedItem } from "@/modules/profile/types/TProfile";
+import type {
+  TProfileItem,
+  TRatedItem,
+} from "@/modules/profile/types/TProfile";
 import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 function badge(tmdbType: "MOVIE" | "TV"): "Filme" | "Série" {

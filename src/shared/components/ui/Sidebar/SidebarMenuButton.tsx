@@ -1,13 +1,13 @@
 "use client";
 
 import { Slot } from "@radix-ui/react-slot";
+import { cn } from "@shared/lib/cn";
+import type * as React from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/shared/components/ui/Tooltip";
-import { cn } from "@shared/lib/cn";
-import type * as React from "react";
 import { useSidebar } from "./SidebarContext";
 
 function SidebarMenuButton({

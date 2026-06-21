@@ -1,5 +1,5 @@
-import { Input } from "@/shared/components/ui/Input";
 import { cn } from "@shared/lib/cn";
+import { Input } from "@/shared/components/ui/Input";
 
 function InputGroupInput({
   className,
