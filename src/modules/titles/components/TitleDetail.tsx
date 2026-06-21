@@ -10,15 +10,14 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@shared/components/ui/Empty";
+import { ErrorState } from "@shared/components/ui/ErrorState";
 import { Skeleton } from "@shared/components/ui/Skeleton";
 import {
   CalendarIcon,
   ClockIcon,
   FilmIcon,
-  RotateCwIcon,
   SearchXIcon,
   StarIcon,
-  TriangleAlertIcon,
   TvIcon,
   UserIcon,
 } from "lucide-react";
@@ -55,7 +54,15 @@ export function TitleDetail({ type, id }: Props) {
     if (status === 404 || status === 400) {
       return <NotFoundState invalid={status === 400} />;
     }
-    return <ErrorState onRetry={() => refetch()} retrying={isFetching} />;
+    return (
+      <StateShell>
+        <ErrorState
+          description="Ocorreu um erro ao buscar o título. Tente novamente em instantes."
+          onRetry={() => refetch()}
+          retrying={isFetching}
+        />
+      </StateShell>
+    );
   }
 
   return <TitleDetailContent title={data} />;
@@ -219,34 +226,6 @@ function NotFoundState({ invalid }: { invalid: boolean }) {
       <EmptyContent>
         <Button asChild variant="outline">
           <Link href="/">Voltar para a Home</Link>
-        </Button>
-      </EmptyContent>
-    </StateShell>
-  );
-}
-
-function ErrorState({
-  onRetry,
-  retrying,
-}: {
-  onRetry: () => void;
-  retrying: boolean;
-}) {
-  return (
-    <StateShell>
-      <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <TriangleAlertIcon />
-        </EmptyMedia>
-        <EmptyTitle>Não foi possível carregar</EmptyTitle>
-        <EmptyDescription>
-          Ocorreu um erro ao buscar o título. Tente novamente em instantes.
-        </EmptyDescription>
-      </EmptyHeader>
-      <EmptyContent>
-        <Button onClick={onRetry} disabled={retrying}>
-          <RotateCwIcon className={retrying ? "animate-spin" : undefined} />
-          Tentar novamente
         </Button>
       </EmptyContent>
     </StateShell>

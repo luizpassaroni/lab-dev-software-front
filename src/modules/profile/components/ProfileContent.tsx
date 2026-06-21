@@ -1,16 +1,8 @@
 "use client";
 
-import { Button } from "@shared/components/ui/Button";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@shared/components/ui/Empty";
+import { Empty } from "@shared/components/ui/Empty";
+import { ErrorState } from "@shared/components/ui/ErrorState";
 import { Skeleton } from "@shared/components/ui/Skeleton";
-import { RotateCwIcon, TriangleAlertIcon } from "lucide-react";
 import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
 import { ProfileHeader } from "@/modules/profile/components/ProfileHeader";
 import { ProfileList } from "@/modules/profile/components/ProfileList";
@@ -41,24 +33,11 @@ export function ProfileContent({ user }: Props) {
       <ProfileShell user={user}>
         <div className="flex flex-1 items-center justify-center py-16">
           <Empty>
-            <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <TriangleAlertIcon />
-              </EmptyMedia>
-              <EmptyTitle>Não foi possível carregar</EmptyTitle>
-              <EmptyDescription>
-                Ocorreu um erro ao buscar seu perfil. Tente novamente em
-                instantes.
-              </EmptyDescription>
-            </EmptyHeader>
-            <EmptyContent>
-              <Button onClick={() => refetch()} disabled={isFetching}>
-                <RotateCwIcon
-                  className={isFetching ? "animate-spin" : undefined}
-                />
-                Tentar novamente
-              </Button>
-            </EmptyContent>
+            <ErrorState
+              description="Ocorreu um erro ao buscar seu perfil. Tente novamente em instantes."
+              onRetry={() => refetch()}
+              retrying={isFetching}
+            />
           </Empty>
         </div>
       </ProfileShell>
