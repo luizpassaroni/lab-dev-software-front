@@ -3,6 +3,7 @@ import "@/shared/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
+import { ThemeProvider } from "@/shared/providers/ThemeProvider";
 import { Header } from "@/shared/components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
@@ -27,14 +28,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${font.className} h-full antialiased`}>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <NuqsAdapter>
-          <QueryProvider>
-            <Header />
-            {children}
-          </QueryProvider>
-        </NuqsAdapter>
+    <html
+      lang="pt-BR"
+      className={`${font.className} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NuqsAdapter>
+            <QueryProvider>
+              <Header />
+              {children}
+            </QueryProvider>
+          </NuqsAdapter>
+        </ThemeProvider>
       </body>
     </html>
   );
