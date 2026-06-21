@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome check --write"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.14",

@@ -1,5 +1,5 @@
-import { Textarea } from "@/shared/components/ui/Textarea";
 import { cn } from "@shared/lib/cn";
+import { Textarea } from "@/shared/components/ui/Textarea";
 
 function InputGroupTextarea({
   className,

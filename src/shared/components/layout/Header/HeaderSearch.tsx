@@ -1,7 +1,5 @@
 "use client";
 
-import { useSearchTitles } from "@/modules/titles/hooks/useSearchTitles";
-import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 import { Badge } from "@shared/components/ui/Badge";
 import { Button } from "@shared/components/ui/Button";
 import {
@@ -15,8 +13,10 @@ import {
 import { Kbd, KbdGroup } from "@shared/components/ui/Kbd";
 import { Spinner } from "@shared/components/ui/Spinner";
 import { FilmIcon, SearchIcon, TvIcon } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useSearchTitles } from "@/modules/titles/hooks/useSearchTitles";
+import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 const HeaderSearch = () => {
   const [open, setOpen] = useState(false);

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import * as React from "react";
 import { type DayButton, getDefaultClassNames } from "react-day-picker";
+import { Button } from "@/shared/components/ui/Button";
 
 export function CalendarDayButton({
   className,

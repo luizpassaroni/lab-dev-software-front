@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@shared/lib/cn";
+import type * as React from "react";
 import {
   Sheet,
   SheetContent,
@@ -7,8 +9,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/shared/components/ui/Sheet";
-import { cn } from "@shared/lib/cn";
-import type * as React from "react";
 import { SIDEBAR_WIDTH_MOBILE } from "./SidebarConstants";
 import { useSidebar } from "./SidebarContext";
 

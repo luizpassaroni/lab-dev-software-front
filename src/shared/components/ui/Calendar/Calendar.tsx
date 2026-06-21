@@ -1,6 +1,5 @@
 "use client";
 
-import { type Button, buttonVariants } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import {
   ChevronDownIcon,
@@ -9,6 +8,7 @@ import {
 } from "lucide-react";
 import type * as React from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
+import { type Button, buttonVariants } from "@/shared/components/ui/Button";
 import { CalendarDayButton } from "./CalendarDayButton";
 
 function Calendar({

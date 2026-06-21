@@ -2,9 +2,9 @@ import "@/shared/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { QueryProvider } from "@/shared/providers/QueryProvider";
-import { Header } from "@/shared/components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Header } from "@/shared/components/layout/Header";
+import { QueryProvider } from "@/shared/providers/QueryProvider";
 
 const font = Inter({
   variable: "--font-inter",

@@ -1,8 +1,8 @@
 "use client";
 
-import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { cn } from "@shared/lib/cn";
 import * as React from "react";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 const SidebarMenuSkeleton = React.forwardRef<
   HTMLDivElement,

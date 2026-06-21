@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@shared/lib/cn";
+import type * as React from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,8 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/components/ui/Dialog";
-import { cn } from "@shared/lib/cn";
-import type * as React from "react";
 import { Command } from "./Command";
 
 function CommandDialog({

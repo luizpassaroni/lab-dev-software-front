@@ -1,6 +1,6 @@
-import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Button } from "@/shared/components/ui/Button";
 
 const inputGroupButtonVariants = cva(
   "flex items-center gap-2 text-sm shadow-none",

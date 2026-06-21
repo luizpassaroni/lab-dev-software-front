@@ -1,7 +1,7 @@
-import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 import { Badge } from "@shared/components/ui/Badge";
 import { FilmIcon, TvIcon } from "lucide-react";
 import Link from "next/link";
+import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 type Props = {
   result: TSearchResult;
@@ -41,7 +41,10 @@ export function SearchResultCard({ result }: Props) {
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{result.badge}</Badge>
           {result.score !== undefined ? (
-            <Badge variant="outline" className="ml-auto shrink-0 font-semibold tabular-nums">
+            <Badge
+              variant="outline"
+              className="ml-auto shrink-0 font-semibold tabular-nums"
+            >
               {result.score}
             </Badge>
           ) : null}

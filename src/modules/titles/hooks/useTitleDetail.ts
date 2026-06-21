@@ -1,8 +1,8 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { getTitle } from "@/modules/titles/queries/getTitle";
 import { ApiError } from "@/shared/lib/api-error";
-import { useQuery } from "@tanstack/react-query";
 
 export function useTitleDetail(type: string, id: string) {
   return useQuery({
