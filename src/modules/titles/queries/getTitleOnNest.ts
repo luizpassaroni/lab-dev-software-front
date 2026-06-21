@@ -1,5 +1,6 @@
 import "server-only";
 
+import { getSessionToken } from "@/modules/auth/helpers/session";
 import { getTitleMock } from "@/modules/titles/queries/titles.mock";
 import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
 import { ApiError } from "@/shared/lib/api-error";
@@ -14,7 +15,8 @@ export async function getTitleOnNest(
     return getTitleMock(type, id);
   }
 
-  const response = await nestFetch(`/titles/${type}/${id}`);
+  const token = await getSessionToken();
+  const response = await nestFetch(`/titles/${type}/${id}`, { bearer: token });
 
   if (!response.ok) {
     if (response.status === 404) {
