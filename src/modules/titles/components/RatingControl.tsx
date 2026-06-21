@@ -78,7 +78,7 @@ export function RatingControl({
           </h3>
           <p className="text-muted-foreground text-xs">
             {hasRating
-              ? `Você avaliou este título com nota ${initialRating} de 10`
+              ? `Você avaliou este título com nota ${localRating} de 10`
               : "Dê uma nota de 1 a 10 para este título"}
           </p>
         </div>
