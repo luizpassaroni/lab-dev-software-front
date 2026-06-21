@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest"
-import { render, screen } from "@testing-library/react"
-import { SearchResultCard } from "@/modules/titles/components/SearchResultCard"
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import { SearchResultCard } from "@/modules/titles/components/SearchResultCard";
 
 describe("SearchResultCard", () => {
   it("renders movie card with correct badge and link", () => {
@@ -15,10 +15,10 @@ describe("SearchResultCard", () => {
           badge: "Filme",
         }}
       />,
-    )
-    expect(screen.getByText("Filme")).toBeInTheDocument()
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/titulo/movie/1")
-  })
+    );
+    expect(screen.getByText("Filme")).toBeInTheDocument();
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/titulo/movie/1");
+  });
 
   it("renders TV card with correct badge and link", () => {
     render(
@@ -32,8 +32,8 @@ describe("SearchResultCard", () => {
           badge: "Série",
         }}
       />,
-    )
-    expect(screen.getByText("Série")).toBeInTheDocument()
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/titulo/tv/1")
-  })
-})
+    );
+    expect(screen.getByText("Série")).toBeInTheDocument();
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/titulo/tv/1");
+  });
+});
