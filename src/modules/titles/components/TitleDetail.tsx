@@ -23,6 +23,7 @@ import {
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { RatingControl } from "@/modules/titles/components/RatingControl";
 import { WatchProviders } from "@/modules/titles/components/WatchProviders";
 import { useTitleDetail } from "@/modules/titles/hooks/useTitleDetail";
 import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
@@ -138,6 +139,15 @@ function TitleDetailContent({ title }: { title: TTitleDetail }) {
           {title.overview ? (
             <p className="mt-4 text-pretty text-sm/relaxed">{title.overview}</p>
           ) : null}
+
+          <div className="mt-6 max-w-md">
+            <RatingControl
+              type={title.tmdbType.toLowerCase() as "movie" | "tv"}
+              id={String(title.tmdbId)}
+              initialRating={title.userState?.rating ?? null}
+              isAuthed={!!title.userState}
+            />
+          </div>
 
           {title.cast.length > 0 ? (
             <section className="mt-6">
