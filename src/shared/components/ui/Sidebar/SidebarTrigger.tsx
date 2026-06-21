@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@shared/lib/cn";
 import { PanelLeftIcon } from "lucide-react";
 import type * as React from "react";
+import { Button } from "@/shared/components/ui/Button";
 import { useSidebar } from "./SidebarContext";
 
 function SidebarTrigger({

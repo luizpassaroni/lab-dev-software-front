@@ -1,7 +1,7 @@
 "use client";
 
-import { getProfile } from "@/modules/profile/queries/getProfile";
 import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "@/modules/profile/queries/getProfile";
 
 export function useProfile() {
   return useQuery({

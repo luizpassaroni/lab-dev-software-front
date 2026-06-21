@@ -1,5 +1,5 @@
-import { Label } from "@/shared/components/ui/Label";
 import { cn } from "@shared/lib/cn";
+import { Label } from "@/shared/components/ui/Label";
 
 function FieldLabel({
   className,

@@ -1,5 +1,5 @@
-import { Separator } from "@/shared/components/ui/Separator";
 import { cn } from "@shared/lib/cn";
+import { Separator } from "@/shared/components/ui/Separator";
 
 function ItemSeparator({
   className,
