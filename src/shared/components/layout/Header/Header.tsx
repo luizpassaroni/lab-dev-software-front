@@ -2,6 +2,7 @@ import { getMe } from "@/modules/auth/queries/getMe";
 import { HeaderLogo } from "./HeaderLogo";
 import { HeaderSearch } from "./HeaderSearch";
 import { HeaderUser } from "./HeaderUser";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Header = async () => {
   const user = await getMe();
@@ -12,6 +13,7 @@ const Header = async () => {
         <HeaderLogo />
         <div className="flex flex-1 items-center justify-end gap-3">
           <HeaderSearch />
+          <ThemeToggle />
           <HeaderUser user={user} />
         </div>
       </div>
