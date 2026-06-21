@@ -38,7 +38,14 @@ export function SearchResultCard({ result }: Props) {
             {result.year ?? "Ano indisponível"}
           </p>
         </div>
-        <Badge variant="secondary">{result.badge}</Badge>
+        <div className="flex items-center gap-2">
+          <Badge variant="secondary">{result.badge}</Badge>
+          {result.score !== undefined ? (
+            <Badge variant="outline" className="ml-auto shrink-0 font-semibold tabular-nums">
+              {result.score}
+            </Badge>
+          ) : null}
+        </div>
       </div>
     </Link>
   );
