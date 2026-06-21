@@ -5,6 +5,7 @@ export type TSearchResult = {
   year: number | null
   posterUrl: string | null
   badge: "Filme" | "Série"
+  score?: number
 }
 
 export type TSearchResponse = {
