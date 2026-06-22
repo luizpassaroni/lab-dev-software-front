@@ -11,7 +11,10 @@ export default function Home() {
     <main className="flex flex-1 flex-col items-center justify-start px-4 py-16">
       <HomeSearch />
 
-      <h1 className="mt-10 text-balance text-center font-semibold text-4xl tracking-tight sm:text-5xl">
+      <p className="mt-10 text-center font-semibold text-sm uppercase tracking-widest text-primary">
+        Plot Twist
+      </p>
+      <h1 className="mt-2 text-balance text-center font-semibold text-4xl tracking-tight sm:text-5xl">
         Onde assistir?
       </h1>
       <p className="mt-3 max-w-md text-balance text-center text-muted-foreground sm:text-lg">
