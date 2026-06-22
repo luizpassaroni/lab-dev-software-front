@@ -3,14 +3,14 @@
 import { Button } from "@shared/components/ui/Button";
 import {
   Empty,
-  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from "@shared/components/ui/Empty";
-import { Skeleton } from "@shared/components/ui/Skeleton";
-import { RotateCwIcon, SearchXIcon, TriangleAlertIcon } from "lucide-react";
+import { ErrorState } from "@shared/components/ui/ErrorState";
+import { LoadingState } from "@shared/components/ui/LoadingState";
+import { RotateCwIcon, SearchXIcon } from "lucide-react";
 import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid";
 import { useDiscover } from "@/modules/titles/hooks/useDiscover";
 
@@ -37,22 +37,11 @@ export function DiscoverGrid({ genreId }: Props) {
   if (isError) {
     return (
       <DiscoverStateShell>
-        <EmptyHeader>
-          <EmptyMedia variant="icon">
-            <TriangleAlertIcon />
-          </EmptyMedia>
-          <EmptyTitle>Não foi possível carregar</EmptyTitle>
-          <EmptyDescription>
-            Ocorreu um erro ao carregar os destaques. Tente novamente em
-            instantes.
-          </EmptyDescription>
-        </EmptyHeader>
-        <EmptyContent>
-          <Button onClick={() => refetch()} disabled={isFetching}>
-            <RotateCwIcon className={isFetching ? "animate-spin" : undefined} />
-            Tentar novamente
-          </Button>
-        </EmptyContent>
+        <ErrorState
+          description="Ocorreu um erro ao carregar os destaques. Tente novamente em instantes."
+          onRetry={() => refetch()}
+          retrying={isFetching}
+        />
       </DiscoverStateShell>
     );
   }
@@ -108,15 +97,7 @@ function DiscoverStateShell({ children }: { children: React.ReactNode }) {
 function DiscoverGridSkeleton() {
   return (
     <section className="w-full">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <div key={index} className="space-y-3">
-            <Skeleton className="aspect-[2/3] w-full rounded-lg" />
-            <Skeleton className="h-5 w-4/5" />
-            <Skeleton className="h-4 w-1/2" />
-          </div>
-        ))}
-      </div>
+      <LoadingState />
     </section>
   );
 }
