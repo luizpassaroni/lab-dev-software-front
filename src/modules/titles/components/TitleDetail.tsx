@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { RatingControl } from "@/modules/titles/components/RatingControl";
+import { TitleActions } from "@/modules/titles/components/TitleActions";
 import { WatchProviders } from "@/modules/titles/components/WatchProviders";
 import { useTitleDetail } from "@/modules/titles/hooks/useTitleDetail";
 import type { TTitleDetail } from "@/modules/titles/types/TTitleDetail";
@@ -152,6 +153,16 @@ function TitleDetailContent({ title }: { title: TTitleDetail }) {
               type={title.tmdbType.toLowerCase() as "movie" | "tv"}
               id={String(title.tmdbId)}
               initialRating={title.userState?.rating ?? null}
+              isAuthed={!!title.userState}
+            />
+          </div>
+
+          <div className="mt-4 max-w-md">
+            <TitleActions
+              type={title.tmdbType.toLowerCase() as "movie" | "tv"}
+              id={String(title.tmdbId)}
+              initialWatched={title.userState?.watched ?? false}
+              initialFavorite={title.userState?.favorite ?? false}
               isAuthed={!!title.userState}
             />
           </div>
