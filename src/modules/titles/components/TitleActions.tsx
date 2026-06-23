@@ -48,7 +48,10 @@ export function TitleActions({
       return;
     }
     const next = !watched;
-    if (next) { setWatchedAnim(true); setWatchedIconAnim(true); }
+    if (next) {
+      setWatchedAnim(true);
+      setWatchedIconAnim(true);
+    }
     watchedMutation.mutate(next, {
       onSuccess: () => {
         setWatched(next);
@@ -66,7 +69,10 @@ export function TitleActions({
       return;
     }
     const next = !favorite;
-    if (next) { setFavoriteAnim(true); setFavoriteIconAnim(true); }
+    if (next) {
+      setFavoriteAnim(true);
+      setFavoriteIconAnim(true);
+    }
     favoriteMutation.mutate(next, {
       onSuccess: () => {
         setFavorite(next);
