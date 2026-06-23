@@ -16,7 +16,7 @@ const CATEGORIES: {
 
 function ProviderItem({ provider }: { provider: TProvider }) {
   return (
-    <div className="flex items-center gap-2 rounded-md border bg-card px-3 py-2">
+    <div className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 transition-colors duration-150 hover:bg-primary/5">
       <div className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded bg-muted">
         {provider.logoUrl ? (
           <img
@@ -43,7 +43,7 @@ export function WatchProviders({
   const hasAny = CATEGORIES.some(({ key }) => providers[key].length > 0);
 
   return (
-    <section className="mt-8">
+    <section className="rounded-xl border border-primary/50 bg-accent p-6 shadow-sm transition-all duration-300 ease-out hover:shadow-md hover:border-primary/80 hover:-translate-y-px dark:border-primary/25 dark:bg-card dark:hover:border-primary/50">
       <h2 className="mb-4 font-semibold text-xl tracking-tight">
         Onde assistir
       </h2>
