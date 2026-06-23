@@ -6,7 +6,7 @@ const HeaderLogo = () => {
     <Link href="/" className="flex items-center">
       <Image
         src="/images/logo.svg"
-        alt="Logo"
+        alt="Plot Twist"
         width={59}
         height={36}
         priority

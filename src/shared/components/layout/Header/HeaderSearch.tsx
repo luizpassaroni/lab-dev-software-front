@@ -13,15 +13,29 @@ import {
 import { Kbd, KbdGroup } from "@shared/components/ui/Kbd";
 import { Spinner } from "@shared/components/ui/Spinner";
 import { FilmIcon, SearchIcon, TvIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSearchTitles } from "@/modules/titles/hooks/useSearchTitles";
 import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 const HeaderSearch = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const { query, setQuery, results, isFetching } = useSearchTitles();
+
+  useEffect(() => {
+    if (isHome) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isHome]);
 
   const handleOpenChange = (value: boolean) => {
     setOpen(value);
@@ -34,6 +48,8 @@ const HeaderSearch = () => {
     setOpen(false);
     router.push(`/titulo/${type}/${result.tmdbId}`);
   };
+
+  if (isHome) return null;
 
   return (
     <>
