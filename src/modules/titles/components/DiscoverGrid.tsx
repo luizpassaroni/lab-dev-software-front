@@ -15,10 +15,66 @@ import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid
 import { useDiscover } from "@/modules/titles/hooks/useDiscover";
 
 type Props = {
-  genreId: number;
+  genreId: number | null;
 };
 
+const TRENDING_FALLBACK_GENRE_ID = 28;
+
 export function DiscoverGrid({ genreId }: Props) {
+  if (genreId === null) {
+    return <TrendingDiscoverGrid />;
+  }
+
+  return (
+    <DiscoverGridQuery
+      genreId={genreId}
+      emptyDescription="Nenhum título encontrado para este gênero."
+    />
+  );
+}
+
+function TrendingDiscoverGrid() {
+  const query = useDiscover(null);
+
+  if (query.isError) {
+    return (
+      <DiscoverGridQuery
+        genreId={TRENDING_FALLBACK_GENRE_ID}
+        emptyDescription="Nenhum título em alta encontrado agora."
+      />
+    );
+  }
+
+  return (
+    <DiscoverGridView
+      query={query}
+      emptyDescription="Nenhum título em alta encontrado agora."
+    />
+  );
+}
+
+function DiscoverGridQuery({
+  genreId,
+  emptyDescription,
+}: {
+  genreId: number;
+  emptyDescription: string;
+}) {
+  return (
+    <DiscoverGridView
+      query={useDiscover(genreId)}
+      emptyDescription={emptyDescription}
+    />
+  );
+}
+
+function DiscoverGridView({
+  query,
+  emptyDescription,
+}: {
+  query: ReturnType<typeof useDiscover>;
+  emptyDescription: string;
+}) {
   const {
     data,
     isPending,
@@ -28,7 +84,7 @@ export function DiscoverGrid({ genreId }: Props) {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useDiscover(genreId);
+  } = query;
 
   if (isPending) {
     return <DiscoverGridSkeleton />;
@@ -56,9 +112,7 @@ export function DiscoverGrid({ genreId }: Props) {
             <SearchXIcon />
           </EmptyMedia>
           <EmptyTitle>Nenhum destaque</EmptyTitle>
-          <EmptyDescription>
-            Nenhum título encontrado para este gênero.
-          </EmptyDescription>
+          <EmptyDescription>{emptyDescription}</EmptyDescription>
         </EmptyHeader>
       </DiscoverStateShell>
     );

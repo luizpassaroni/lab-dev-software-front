@@ -1,13 +1,16 @@
 import { Badge } from "@shared/components/ui/Badge";
+import { cn } from "@shared/lib/cn";
 import { FilmIcon, TvIcon } from "lucide-react";
 import Link from "next/link";
 import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 type Props = {
   result: TSearchResult;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
-export function SearchResultCard({ result }: Props) {
+export function SearchResultCard({ result, className, style }: Props) {
   const isMovie = result.tmdbType === "MOVIE";
   const segment = isMovie ? "movie" : "tv";
   const Icon = isMovie ? FilmIcon : TvIcon;
@@ -15,17 +18,21 @@ export function SearchResultCard({ result }: Props) {
   return (
     <Link
       href={`/titulo/${segment}/${result.tmdbId}`}
-      className="group flex min-w-0 flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      style={style}
+      className={cn(
+        "group flex min-w-0 flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm transition-[background-color,border-color,box-shadow,filter] duration-200 hover:border-primary/35 hover:bg-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        className,
+      )}
     >
-      <div className="flex aspect-[2/3] items-center justify-center bg-muted">
+      <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden bg-muted after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_20%,oklch(0.7686_0.1647_70.0804_/_0.18),transparent_42%)] after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100">
         {result.posterUrl ? (
           <img
             src={result.posterUrl}
             alt={result.title}
-            className="size-full object-cover transition-transform group-hover:scale-[1.02]"
+            className="size-full object-cover transition-[filter,transform] duration-300 group-hover:scale-[1.04] group-hover:saturate-125"
           />
         ) : (
-          <Icon className="size-10 text-muted-foreground" />
+          <Icon className="size-10 text-muted-foreground transition-colors duration-200 group-hover:text-primary" />
         )}
       </div>
 

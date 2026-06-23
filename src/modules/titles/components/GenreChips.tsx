@@ -26,10 +26,11 @@ export function GenreChips({ selectedId, onSelect }: Props) {
         type="button"
         variant={selectedId === null ? "default" : "outline"}
         size="sm"
+        className="transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_oklch(0.7686_0.1647_70.0804_/_0.35)]"
         aria-pressed={selectedId === null}
         onClick={() => onSelect(null)}
       >
-        Todos
+        Em alta
       </Button>
       {genres.map((genre) => {
         const active = genre.id === selectedId;
@@ -39,6 +40,7 @@ export function GenreChips({ selectedId, onSelect }: Props) {
             type="button"
             variant={active ? "default" : "outline"}
             size="sm"
+            className="transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_oklch(0.7686_0.1647_70.0804_/_0.35)]"
             aria-pressed={active}
             onClick={() => onSelect(active ? null : genre.id)}
           >
