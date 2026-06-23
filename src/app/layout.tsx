@@ -1,7 +1,7 @@
 import "@/shared/styles/globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Header } from "@/shared/components/layout/Header";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
@@ -10,6 +10,12 @@ import { ThemeProvider } from "@/shared/providers/ThemeProvider";
 const font = Inter({
   variable: "--font-inter",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
+
+const displayFont = Fraunces({
+  variable: "--font-display",
+  weight: ["600", "700"],
   subsets: ["latin"],
 });
 
@@ -30,14 +36,13 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${font.className} h-full antialiased`}
+      className={`${font.className} ${displayFont.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           <NuqsAdapter>

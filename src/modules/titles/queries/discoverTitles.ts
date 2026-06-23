@@ -6,13 +6,15 @@ import { ApiError } from "@/shared/lib/api-error";
  * to the Nest API directly.
  */
 export async function discoverTitles(
-  genreId: number,
+  genreId: number | null,
   page = 1,
 ): Promise<TSearchResponse> {
   const params = new URLSearchParams({
-    genre: String(genreId),
     page: String(page),
   });
+  if (genreId !== null) {
+    params.set("genre", String(genreId));
+  }
 
   let response: Response;
   try {
