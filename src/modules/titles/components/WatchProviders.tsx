@@ -55,7 +55,7 @@ export function WatchProviders({
   const hasAny = CATEGORIES.some(({ key }) => providers[key].length > 0);
 
   return (
-    <section className="mt-8 rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
+    <section className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
       <h2 className="mb-1 font-semibold text-xl tracking-tight">
         Onde assistir
       </h2>

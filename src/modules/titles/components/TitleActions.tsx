@@ -34,7 +34,6 @@ export function TitleActions({
   const [favoriteAnim, setFavoriteAnim] = React.useState(false);
   const [favoriteIconAnim, setFavoriteIconAnim] = React.useState(false);
 
-  // Sync state if the initial props change (e.g., after a mutation or data refetch)
   React.useEffect(() => {
     setWatched(initialWatched);
   }, [initialWatched]);
