@@ -11,12 +11,12 @@ const ThemeToggle = () => {
     <Button
       variant="ghost"
       size="icon"
-      className="rounded-full"
+      className="group rounded-full"
       aria-label="Alternar tema"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      <SunIcon className="dark:hidden" />
-      <MoonIcon className="hidden dark:block" />
+      <SunIcon className="transition-transform duration-200 group-hover:rotate-45 dark:hidden" />
+      <MoonIcon className="hidden transition-transform duration-200 group-hover:-rotate-12 dark:block" />
     </Button>
   );
 };
