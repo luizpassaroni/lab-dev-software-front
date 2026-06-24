@@ -11,14 +11,17 @@ import {
 import { ErrorState } from "@shared/components/ui/ErrorState";
 import { LoadingState } from "@shared/components/ui/LoadingState";
 import { RotateCwIcon, SearchXIcon } from "lucide-react";
+import { useMemo } from "react";
+import { useProfile } from "@/modules/profile/hooks/useProfile";
 import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid";
 import { useSearchResults } from "@/modules/titles/hooks/useSearchResults";
 
 type Props = {
   query: string;
+  isAuthed: boolean;
 };
 
-export function SearchResults({ query }: Props) {
+export function SearchResults({ query, isAuthed }: Props) {
   const {
     data,
     isPending,
@@ -29,6 +32,16 @@ export function SearchResults({ query }: Props) {
     fetchNextPage,
     isFetchingNextPage,
   } = useSearchResults(query);
+
+  const { data: profile } = useProfile({ enabled: isAuthed });
+  const favoritedKeys = useMemo(
+    () =>
+      new Set(
+        profile?.favoritos.map((item) => `${item.tmdbType}-${item.tmdbId}`) ??
+          [],
+      ),
+    [profile],
+  );
 
   if (isPending) {
     return <SearchResultsSkeleton query={query} />;
@@ -65,13 +78,14 @@ export function SearchResults({ query }: Props) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <main className="relative mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+      <div aria-hidden className="search-ambient" />
       <div className="mb-6">
         <p className="text-muted-foreground text-sm">Resultados para</p>
         <h1 className="font-semibold text-3xl tracking-tight">{query}</h1>
       </div>
 
-      <SearchResultsGrid results={results} />
+      <SearchResultsGrid results={results} favoritedKeys={favoritedKeys} />
 
       {hasNextPage ? (
         <div className="mt-8 flex justify-center">

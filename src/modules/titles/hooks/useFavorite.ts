@@ -12,6 +12,7 @@ export function useFavorite(type: string, id: string) {
       queryClient.invalidateQueries({
         queryKey: ["titles", "detail", type, id],
       });
+      queryClient.invalidateQueries({ queryKey: ["profile", "me"] });
     },
   });
 }

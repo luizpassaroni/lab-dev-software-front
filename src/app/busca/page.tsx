@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getMe } from "@/modules/auth/queries/getMe";
 import { SearchResults } from "@/modules/titles/components/SearchResults";
 
 export const metadata: Metadata = {
@@ -21,5 +22,7 @@ export default async function SearchPage({ searchParams }: Props) {
     redirect("/");
   }
 
-  return <SearchResults query={query} />;
+  const user = await getMe();
+
+  return <SearchResults query={query} isAuthed={!!user} />;
 }
