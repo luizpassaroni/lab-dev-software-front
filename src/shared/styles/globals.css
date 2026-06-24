@@ -229,6 +229,82 @@
   }
 }
 
+@keyframes action-pop {
+  0% {
+    transform: scale(1);
+  }
+  38% {
+    transform: scale(1.22);
+  }
+  68% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rating-flip {
+  0% {
+    transform: scale(2.2);
+    opacity: 0;
+    filter: blur(3px);
+  }
+  38% {
+    transform: scale(0.9);
+    opacity: 1;
+    filter: blur(0);
+  }
+  62% {
+    transform: scale(1.07);
+  }
+  84% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.4);
+  }
+  26% {
+    transform: scale(1.1);
+  }
+  42% {
+    transform: scale(1.46);
+  }
+  62% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes eye-pop {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.48) rotate(-14deg);
+  }
+  48% {
+    transform: scale(1.18) rotate(7deg);
+  }
+  72% {
+    transform: scale(1.06) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 @layer utilities {
   .animate-auth-rise {
     animation: auth-rise 0.5s ease-out both;
@@ -241,6 +317,22 @@
   .animate-card-rise {
     animation: card-rise 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: calc(var(--i, 0) * 45ms);
+  }
+
+  .animate-action-pop {
+    animation: action-pop 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-rating-flip {
+    animation: rating-flip 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-heart-beat {
+    animation: heart-beat 0.46s linear;
+  }
+
+  .animate-eye-pop {
+    animation: eye-pop 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .font-display {
@@ -261,6 +353,24 @@
 }
 
 @layer components {
+  .rating-slider [data-slot="slider-thumb"] {
+    transition-property: color, box-shadow, transform;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rating-slider [data-slot="slider-thumb"]:hover {
+    transform: scale(1.35);
+  }
+
+  .rating-slider [data-slot="slider-thumb"]:active {
+    transform: scale(1.15);
+  }
+
+  .rating-slider [data-slot="slider-range"] {
+    transition: width 80ms ease-out;
+  }
+
   .home-backdrop {
     position: absolute;
     inset: 0;
@@ -422,6 +532,10 @@
   .animate-auth-rise,
   .animate-home-rise,
   .animate-card-rise,
+  .animate-action-pop,
+  .animate-rating-flip,
+  .animate-heart-beat,
+  .animate-eye-pop,
   .home-backdrop__poster {
     animation: none;
   }
