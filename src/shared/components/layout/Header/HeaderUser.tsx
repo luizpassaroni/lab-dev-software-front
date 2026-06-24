@@ -24,7 +24,7 @@ const HeaderUser = ({ user }: Props) => {
 
   if (!user) {
     return (
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-1 sm:gap-2">
         <Button variant="ghost" size="sm" asChild>
           <Link href="/login">Entrar</Link>
         </Button>

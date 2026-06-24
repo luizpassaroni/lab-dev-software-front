@@ -1,16 +1,22 @@
 import { Badge } from "@shared/components/ui/Badge";
 import { cn } from "@shared/lib/cn";
-import { FilmIcon, TvIcon } from "lucide-react";
+import { FilmIcon, HeartIcon, TvIcon } from "lucide-react";
 import Link from "next/link";
 import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
 type Props = {
   result: TSearchResult;
+  favorited?: boolean;
   className?: string;
   style?: React.CSSProperties;
 };
 
-export function SearchResultCard({ result, className, style }: Props) {
+export function SearchResultCard({
+  result,
+  favorited = false,
+  className,
+  style,
+}: Props) {
   const isMovie = result.tmdbType === "MOVIE";
   const segment = isMovie ? "movie" : "tv";
   const Icon = isMovie ? FilmIcon : TvIcon;
@@ -24,7 +30,10 @@ export function SearchResultCard({ result, className, style }: Props) {
         className,
       )}
     >
-      <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden bg-muted after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_20%,oklch(0.7686_0.1647_70.0804_/_0.18),transparent_42%)] after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100">
+      <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden bg-muted after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_20%,color-mix(in_oklch,var(--primary)_26%,transparent),transparent_42%)] after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100">
+        {favorited ? (
+          <HeartIcon className="absolute top-2 right-2 z-10 size-5 fill-primary text-primary drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]" />
+        ) : null}
         {result.posterUrl ? (
           <img
             src={result.posterUrl}

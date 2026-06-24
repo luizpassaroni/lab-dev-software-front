@@ -80,7 +80,7 @@ export function RatingControl({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <h3 className="font-semibold text-base flex items-center gap-2">
-            <StarIcon className="size-5 fill-amber-400 text-amber-400" />
+            <StarIcon className="size-5 fill-primary text-primary" />
             Avaliação
           </h3>
           <p className="text-muted-foreground text-xs">

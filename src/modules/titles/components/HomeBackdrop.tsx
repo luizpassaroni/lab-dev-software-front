@@ -1,9 +1,9 @@
 const BACKDROP_POSTERS = [
-  "from-primary/35 via-primary/10 to-transparent",
-  "from-sky-500/20 via-primary/10 to-transparent",
-  "from-rose-500/20 via-primary/10 to-transparent",
-  "from-violet-500/20 via-primary/10 to-transparent",
-  "from-emerald-400/15 via-primary/10 to-transparent",
+  "from-primary/30 via-primary/10 to-transparent",
+  "from-secondary/30 via-primary/10 to-transparent",
+  "from-accent/25 via-primary/10 to-transparent",
+  "from-muted-foreground/20 via-primary/10 to-transparent",
+  "from-chart-5/20 via-primary/10 to-transparent",
 ];
 
 export function HomeBackdrop() {

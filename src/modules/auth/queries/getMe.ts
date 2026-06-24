@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { getSessionToken } from "@/modules/auth/helpers/session";
 import { meMock } from "@/modules/auth/queries/auth.mock";
 import type { TAuthUser } from "@/modules/auth/types/TAuthUser";
@@ -10,7 +11,7 @@ import { isBackendConfigured, nestFetch } from "@/shared/lib/serverApi";
  * `/api/auth/me` route handler (browser rehydration) and by the server-rendered
  * Header. Returns `null` when there is no session or the token is rejected.
  */
-export async function getMe(): Promise<TAuthUser | null> {
+export const getMe = cache(async (): Promise<TAuthUser | null> => {
   const token = await getSessionToken();
   if (!token) {
     return null;
@@ -27,4 +28,4 @@ export async function getMe(): Promise<TAuthUser | null> {
 
   const data = await response.json();
   return data.user;
-}
+});
