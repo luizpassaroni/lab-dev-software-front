@@ -78,7 +78,7 @@ export function SearchResults({ query, isAuthed }: Props) {
   }
 
   return (
-    <main className="relative mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <main className="relative isolate mx-auto w-full max-w-6xl flex-1 px-4 py-8">
       <div aria-hidden className="search-ambient" />
       <div className="mb-6">
         <p className="text-muted-foreground text-sm">Resultados para</p>
