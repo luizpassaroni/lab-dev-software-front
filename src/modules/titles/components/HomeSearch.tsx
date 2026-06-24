@@ -157,7 +157,7 @@ export function HomeSearch() {
         onSubmit={handleSubmit}
         className="home-search-flight-form mx-auto w-full max-w-2xl"
       >
-        <InputGroup className="h-12 border-primary/25 bg-card/90 shadow-md transition-[border-color,box-shadow,background-color] duration-200 has-[[data-slot=input-group-control]:focus-visible]:border-primary/60 has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_1px_oklch(0.7686_0.1647_70.0804_/_0.35),0_4px_8px_-1px_hsl(0_0%_0%_/_0.1)] dark:border-primary/30 dark:bg-card/80">
+        <InputGroup className="h-12 border-primary/25 bg-card/90 shadow-md transition-[border-color,box-shadow,background-color] duration-200 has-[[data-slot=input-group-control]:focus-visible]:border-primary/60 has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_1px_color-mix(in_oklch,var(--ring)_45%,transparent),0_4px_8px_-1px_hsl(0_0%_0%_/_0.1)] dark:border-primary/30 dark:bg-card/80">
           <InputGroupAddon align="inline-start">
             <SearchIcon className="text-primary" />
           </InputGroupAddon>

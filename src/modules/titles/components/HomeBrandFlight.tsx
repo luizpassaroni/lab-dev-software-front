@@ -101,7 +101,7 @@ const HomeBrandFlight = () => {
     <span
       ref={brandRef}
       aria-hidden="true"
-      className="plot-twist-brand-flight font-display font-semibold text-foreground"
+      className="plot-twist-brand-flight font-display font-semibold text-primary"
     >
       Plot Twist
     </span>

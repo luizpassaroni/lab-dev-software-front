@@ -20,7 +20,7 @@ export default function Home() {
         </p>
         <h1
           id="plot-twist-hero-title"
-          className="plot-twist-hero-title font-display mt-2 text-balance font-semibold text-6xl sm:text-7xl"
+          className="plot-twist-hero-title font-display mt-2 text-balance font-semibold text-6xl text-primary sm:text-7xl"
         >
           Plot Twist
         </h1>

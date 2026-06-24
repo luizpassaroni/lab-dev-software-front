@@ -24,7 +24,7 @@ export function SearchResultCard({ result, className, style }: Props) {
         className,
       )}
     >
-      <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden bg-muted after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_20%,oklch(0.7686_0.1647_70.0804_/_0.18),transparent_42%)] after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100">
+      <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden bg-muted after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_20%,color-mix(in_oklch,var(--primary)_26%,transparent),transparent_42%)] after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100">
         {result.posterUrl ? (
           <img
             src={result.posterUrl}

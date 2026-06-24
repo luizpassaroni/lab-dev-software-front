@@ -14,9 +14,21 @@ const CATEGORIES: {
   { key: "buy", label: "Comprar" },
 ];
 
-function ProviderItem({ provider }: { provider: TProvider }) {
+function ProviderItem({
+  provider,
+  highlight,
+}: {
+  provider: TProvider;
+  highlight?: boolean;
+}) {
   return (
-    <div className="flex items-center gap-2 rounded-md border bg-card px-3 py-2">
+    <div
+      className={
+        highlight
+          ? "flex items-center gap-2 rounded-md border border-primary/30 bg-accent/35 px-3 py-2 shadow-xs transition-[border-color,background-color,box-shadow] duration-200 ease-out hover:border-primary/45 hover:bg-accent/45 hover:shadow-sm"
+          : "flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted/70 hover:text-foreground"
+      }
+    >
       <div className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded bg-muted">
         {provider.logoUrl ? (
           <img
@@ -43,10 +55,13 @@ export function WatchProviders({
   const hasAny = CATEGORIES.some(({ key }) => providers[key].length > 0);
 
   return (
-    <section className="mt-8">
-      <h2 className="mb-4 font-semibold text-xl tracking-tight">
+    <section className="mt-8 rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
+      <h2 className="mb-1 font-semibold text-xl tracking-tight">
         Onde assistir
       </h2>
+      <p className="mb-4 text-muted-foreground text-sm">
+        Streaming brasileiro disponível pela TMDB.
+      </p>
 
       {hasAny ? (
         <div className="flex flex-col gap-4">
@@ -55,19 +70,29 @@ export function WatchProviders({
             if (items.length === 0) return null;
 
             return (
-              <div key={key} className={highlight ? "" : "opacity-90"}>
-                <p
-                  className={
-                    highlight
-                      ? "mb-2 font-medium text-foreground text-sm"
-                      : "mb-2 text-muted-foreground text-sm"
-                  }
-                >
-                  {label}
+              <div key={key} className={highlight ? "" : "opacity-85"}>
+                <p className="mb-2 flex items-center gap-2 font-medium text-sm">
+                  {highlight ? (
+                    <span
+                      aria-hidden="true"
+                      className="size-2 rounded-full bg-primary"
+                    />
+                  ) : null}
+                  <span
+                    className={
+                      highlight ? "text-foreground" : "text-muted-foreground"
+                    }
+                  >
+                    {label}
+                  </span>
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {items.map((provider) => (
-                    <ProviderItem key={provider.name} provider={provider} />
+                    <ProviderItem
+                      key={provider.name}
+                      provider={provider}
+                      highlight={highlight}
+                    />
                   ))}
                 </div>
               </div>

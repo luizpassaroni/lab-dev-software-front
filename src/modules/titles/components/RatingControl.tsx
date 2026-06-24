@@ -73,11 +73,11 @@ export function RatingControl({
   };
 
   return (
-    <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-xs transition-all duration-300 hover:shadow-md">
+    <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-xs transition-shadow duration-200 ease-out hover:shadow-md">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <h3 className="font-semibold text-base flex items-center gap-2">
-            <StarIcon className="size-5 fill-amber-400 text-amber-400" />
+            <StarIcon className="size-5 fill-primary text-primary" />
             Avaliação
           </h3>
           <p className="text-muted-foreground text-xs">
