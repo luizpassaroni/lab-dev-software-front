@@ -73,140 +73,176 @@ function TitleDetailContent({ title }: { title: TTitleDetail }) {
   const isMovie = title.tmdbType === "MOVIE";
 
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+    <div className="relative flex-1">
       {title.backdropUrl ? (
-        <img
-          src={title.backdropUrl}
-          alt=""
-          className="mb-6 aspect-video w-full rounded-lg object-cover"
-        />
+        <div className="title-backdrop" aria-hidden="true">
+          <img src={title.backdropUrl} alt="" className="title-backdrop__img" />
+          <div className="title-backdrop__scrim" />
+        </div>
       ) : null}
 
-      <div className="flex flex-col gap-6 md:flex-row">
-        <div className="mx-auto w-44 shrink-0 overflow-hidden rounded-lg bg-muted md:mx-0 md:w-56">
-          <div className="flex aspect-[2/3] items-center justify-center">
-            {title.posterUrl ? (
-              <img
-                src={title.posterUrl}
-                alt={title.title}
-                className="size-full object-cover"
-              />
-            ) : isMovie ? (
-              <FilmIcon className="size-10 text-muted-foreground" />
-            ) : (
-              <TvIcon className="size-10 text-muted-foreground" />
-            )}
-          </div>
-        </div>
-
-        <div className="min-w-0 flex-1">
-          <h1 className="font-semibold text-3xl tracking-tight">
-            {title.title}
-          </h1>
-
-          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground text-sm">
-            <Badge variant="secondary">{isMovie ? "Filme" : "Série"}</Badge>
-            {title.year !== null ? (
-              <span className="flex items-center gap-1">
-                <CalendarIcon className="size-4" />
-                {title.year}
-              </span>
-            ) : null}
-            {title.tmdbRating > 0 ? (
-              <span className="flex items-center gap-1">
-                <StarIcon className="size-4" />
-                {title.tmdbRating.toFixed(1)}
-              </span>
-            ) : null}
-            {isMovie && title.runtime !== null ? (
-              <span className="flex items-center gap-1">
-                <ClockIcon className="size-4" />
-                {formatRuntime(title.runtime)}
-              </span>
-            ) : null}
-            {!isMovie && title.seasons !== null ? (
-              <span className="flex items-center gap-1">
-                <TvIcon className="size-4" />
-                {title.seasons === 1
-                  ? "1 temporada"
-                  : `${title.seasons} temporadas`}
-              </span>
-            ) : null}
-          </div>
-
-          {title.genres.length > 0 ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {title.genres.map((genre) => (
-                <Badge key={genre} variant="outline">
-                  {genre}
-                </Badge>
-              ))}
-            </div>
-          ) : null}
-
-          {title.overview ? (
-            <p className="mt-4 text-pretty text-sm/relaxed">{title.overview}</p>
-          ) : null}
-
-          <div className="mt-6 max-w-md">
-            <RatingControl
-              type={title.tmdbType.toLowerCase() as "movie" | "tv"}
-              id={String(title.tmdbId)}
-              initialRating={title.userState?.rating ?? null}
-              isAuthed={!!title.userState}
-            />
-          </div>
-
-          <div className="mt-4 max-w-md">
-            <TitleActions
-              type={title.tmdbType.toLowerCase() as "movie" | "tv"}
-              id={String(title.tmdbId)}
-              initialWatched={title.userState?.watched ?? false}
-              initialFavorite={title.userState?.favorite ?? false}
-              isAuthed={!!title.userState}
-            />
-          </div>
-
-          {title.cast.length > 0 ? (
-            <section className="mt-6">
-              <h2 className="mb-3 font-semibold text-lg tracking-tight">
-                Elenco
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                {title.cast.map((member, index) => (
-                  <div
-                    key={`${member.name}-${index}`}
-                    className="flex w-24 flex-col items-center gap-1 text-center"
-                  >
-                    <div className="flex size-16 items-center justify-center overflow-hidden rounded-full bg-muted">
-                      {member.profileUrl ? (
-                        <img
-                          src={member.profileUrl}
-                          alt={member.name}
-                          className="size-full object-cover"
-                        />
-                      ) : (
-                        <UserIcon className="size-6 text-muted-foreground" />
-                      )}
-                    </div>
-                    <span className="font-medium text-xs leading-tight">
-                      {member.name}
-                    </span>
-                    {member.character ? (
-                      <span className="text-muted-foreground text-xs leading-tight">
-                        {member.character}
-                      </span>
-                    ) : null}
-                  </div>
-                ))}
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 pt-8 pb-12">
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-10">
+          {/* Left column — continuous rail */}
+          <div className="min-w-0">
+            {/* Poster + title block */}
+            <div className="flex gap-5 sm:gap-6">
+              <div className="w-28 shrink-0 overflow-hidden rounded-lg bg-muted sm:w-44">
+                <div className="flex aspect-[2/3] items-center justify-center">
+                  {title.posterUrl ? (
+                    <img
+                      src={title.posterUrl}
+                      alt={title.title}
+                      className="size-full object-cover [transition:transform_380ms_cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02]"
+                    />
+                  ) : isMovie ? (
+                    <FilmIcon className="size-8 text-muted-foreground" />
+                  ) : (
+                    <TvIcon className="size-8 text-muted-foreground" />
+                  )}
+                </div>
               </div>
-            </section>
-          ) : null}
-        </div>
-      </div>
 
-      <WatchProviders providers={title.providers} />
-    </main>
+              <div className="min-w-0 flex-1 pt-1">
+                <h1 className="font-semibold text-2xl leading-snug tracking-tight sm:text-3xl">
+                  {title.title}
+                </h1>
+
+                <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-muted-foreground text-sm">
+                  <Badge variant="secondary" className="gap-1">
+                    {isMovie ? (
+                      <FilmIcon className="size-3" />
+                    ) : (
+                      <TvIcon className="size-3" />
+                    )}
+                    {isMovie ? "Filme" : "Série"}
+                  </Badge>
+
+                  {title.year !== null ? (
+                    <span className="flex items-center gap-1">
+                      <CalendarIcon className="size-3.5" />
+                      {title.year}
+                    </span>
+                  ) : null}
+
+                  {title.tmdbRating > 0 ? (
+                    <span className="flex items-center gap-1 tabular-nums">
+                      <StarIcon className="size-3.5" />
+                      {title.tmdbRating.toFixed(1)}
+                    </span>
+                  ) : null}
+
+                  {isMovie && title.runtime !== null ? (
+                    <span className="flex items-center gap-1">
+                      <ClockIcon className="size-3.5" />
+                      {formatRuntime(title.runtime)}
+                    </span>
+                  ) : null}
+
+                  {!isMovie && title.seasons !== null ? (
+                    <span>
+                      {title.seasons === 1
+                        ? "1 temporada"
+                        : `${title.seasons} temporadas`}
+                    </span>
+                  ) : null}
+                </div>
+
+                {title.genres.length > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {title.genres.map((genre) => (
+                      <Badge key={genre} variant="outline" className="text-xs">
+                        {genre}
+                      </Badge>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+
+            {/* Synopsis */}
+            {title.overview ? (
+              <p className="mt-5 text-pretty text-sm/relaxed">
+                {title.overview}
+              </p>
+            ) : null}
+
+            {/* Actions */}
+            <div className="mt-5">
+              <TitleActions
+                type={title.tmdbType.toLowerCase() as "movie" | "tv"}
+                id={String(title.tmdbId)}
+                initialWatched={title.userState?.watched ?? false}
+                initialFavorite={title.userState?.favorite ?? false}
+                isAuthed={!!title.userState}
+              />
+            </div>
+
+            <hr className="mt-6 border-border" />
+
+            {/* Rating */}
+            <div className="mt-6">
+              <RatingControl
+                type={title.tmdbType.toLowerCase() as "movie" | "tv"}
+                id={String(title.tmdbId)}
+                initialRating={title.userState?.rating ?? null}
+                isAuthed={!!title.userState}
+              />
+            </div>
+
+            {/* Cast */}
+            {title.cast.length > 0 ? (
+              <>
+                <hr className="mt-6 border-border" />
+                <section className="mt-6">
+                  <h2 className="mb-4 font-semibold text-lg tracking-tight">
+                    Elenco
+                  </h2>
+                  <div className="flex flex-wrap gap-4">
+                    {title.cast.map((member, index) => (
+                      <div
+                        key={`${member.name}-${index}`}
+                        className="flex w-20 flex-col items-center gap-1.5 text-center"
+                      >
+                        <div className="flex size-14 items-center justify-center overflow-hidden rounded-full bg-muted">
+                          {member.profileUrl ? (
+                            <img
+                              src={member.profileUrl}
+                              alt={member.name}
+                              className="size-full object-cover"
+                            />
+                          ) : (
+                            <UserIcon className="size-5 text-muted-foreground" />
+                          )}
+                        </div>
+                        <span className="font-medium text-xs leading-tight">
+                          {member.name}
+                        </span>
+                        {member.character ? (
+                          <span className="text-muted-foreground text-xs leading-tight">
+                            {member.character}
+                          </span>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </>
+            ) : null}
+
+            {/* Mobile: watch providers inline */}
+            <div className="mt-8 lg:hidden">
+              <WatchProviders providers={title.providers} />
+            </div>
+          </div>
+
+          {/* Right column — sticky watch providers panel */}
+          <div className="hidden lg:block lg:sticky lg:top-20">
+            <WatchProviders providers={title.providers} />
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
 
@@ -245,19 +281,25 @@ function NotFoundState({ invalid }: { invalid: boolean }) {
 
 function TitleDetailSkeleton() {
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
-      <div className="flex flex-col gap-6 md:flex-row">
-        <Skeleton className="mx-auto aspect-[2/3] w-44 shrink-0 rounded-lg md:mx-0 md:w-56" />
-        <div className="min-w-0 flex-1 space-y-4">
-          <Skeleton className="h-9 w-2/3" />
-          <Skeleton className="h-5 w-1/2" />
-          <div className="flex gap-2">
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-6 w-16" />
+    <main className="mx-auto w-full max-w-6xl flex-1 px-4 pt-8 pb-12">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-10">
+        <div className="min-w-0 space-y-5">
+          <div className="flex gap-5 sm:gap-6">
+            <Skeleton className="aspect-[2/3] w-28 shrink-0 rounded-lg sm:w-44" />
+            <div className="flex-1 space-y-3 pt-1">
+              <Skeleton className="h-8 w-3/4" />
+              <Skeleton className="h-5 w-1/2" />
+              <div className="flex gap-1.5">
+                <Skeleton className="h-5 w-14" />
+                <Skeleton className="h-5 w-14" />
+                <Skeleton className="h-5 w-14" />
+              </div>
+            </div>
           </div>
-          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-16 w-full" />
+          <Skeleton className="h-9 w-44" />
         </div>
+        <Skeleton className="hidden h-56 rounded-xl lg:block" />
       </div>
     </main>
   );

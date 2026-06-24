@@ -2,6 +2,7 @@
 
 import { Button } from "@shared/components/ui/Button";
 import { Slider } from "@shared/components/ui/Slider";
+import { cn } from "@shared/lib/cn";
 import { StarIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -28,6 +29,7 @@ export function RatingControl({
   const [hasRating, setHasRating] = React.useState<boolean>(
     initialRating !== null,
   );
+  const [saveAnim, setSaveAnim] = React.useState(false);
 
   // Sync state if initialRating changes (e.g., after a mutation or data refetch)
   React.useEffect(() => {
@@ -52,6 +54,7 @@ export function RatingControl({
       router.push("/login");
       return;
     }
+    setSaveAnim(true);
     mutate(localRating, {
       onSuccess: () => {
         setHasRating(true);
@@ -73,7 +76,7 @@ export function RatingControl({
   };
 
   return (
-    <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-xs transition-all duration-300 hover:shadow-md">
+    <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <h3 className="font-semibold text-base flex items-center gap-2">
@@ -87,8 +90,10 @@ export function RatingControl({
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-2xl font-bold text-primary">
-          <span>{localRating}</span>
+        <div className="flex items-center gap-2 text-2xl font-bold text-primary tabular-nums">
+          <span key={localRating} className="inline-block animate-rating-flip">
+            {localRating}
+          </span>
           <span className="text-muted-foreground text-sm font-normal">
             / 10
           </span>
@@ -97,7 +102,7 @@ export function RatingControl({
 
       <div className="mt-6 flex flex-col gap-6">
         <div
-          className="px-2"
+          className="px-2 rating-slider"
           onPointerDown={() => {
             if (!isAuthed) {
               router.push("/login");
@@ -144,6 +149,11 @@ export function RatingControl({
             size="sm"
             onClick={handleSave}
             disabled={isPending || (hasRating && localRating === initialRating)}
+            className={cn(
+              "[transition:transform_150ms_cubic-bezier(0.16,1,0.3,1),box-shadow_150ms_ease-out] hover:scale-[1.05] hover:shadow-md active:scale-[0.96]",
+              saveAnim && "animate-action-pop",
+            )}
+            onAnimationEnd={() => setSaveAnim(false)}
           >
             {hasRating ? "Atualizar Nota" : "Confirmar Nota"}
           </Button>
