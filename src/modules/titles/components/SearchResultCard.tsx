@@ -1,6 +1,6 @@
 import { Badge } from "@shared/components/ui/Badge";
 import { cn } from "@shared/lib/cn";
-import { FilmIcon, HeartIcon, TvIcon } from "lucide-react";
+import { FilmIcon, HeartIcon, StarIcon, TvIcon } from "lucide-react";
 import Link from "next/link";
 import type { TSearchResult } from "@/modules/titles/types/TSearchResult";
 
@@ -57,12 +57,22 @@ export function SearchResultCard({
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{result.badge}</Badge>
           {result.score !== undefined ? (
-            <Badge
-              variant="outline"
-              className="ml-auto shrink-0 font-semibold tabular-nums"
-            >
-              {result.score}
-            </Badge>
+            result.isUserScore ? (
+              <Badge
+                variant="outline"
+                className="ml-auto shrink-0 border-accent/50 bg-accent/20 font-semibold tabular-nums"
+              >
+                <StarIcon className="size-2.5" />
+                {result.score}
+              </Badge>
+            ) : (
+              <Badge
+                variant="outline"
+                className="ml-auto shrink-0 font-semibold tabular-nums"
+              >
+                {result.score}
+              </Badge>
+            )
           ) : null}
         </div>
       </div>

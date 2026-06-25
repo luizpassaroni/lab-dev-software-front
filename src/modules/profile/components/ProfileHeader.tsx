@@ -4,6 +4,14 @@ type Props = {
 };
 
 export function ProfileHeader({ name, createdAt }: Props) {
+  const initials = name
+    .trim()
+    .split(/\s+/)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
   const formatted = new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
     month: "long",
@@ -11,11 +19,16 @@ export function ProfileHeader({ name, createdAt }: Props) {
   }).format(new Date(createdAt));
 
   return (
-    <div>
-      <h1 className="font-semibold text-3xl tracking-tight">{name}</h1>
-      <p className="mt-1 text-muted-foreground text-sm">
-        Membro desde {formatted}
-      </p>
+    <div className="flex items-center gap-4">
+      <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-semibold text-lg text-primary-foreground">
+        {initials}
+      </div>
+      <div>
+        <p className="font-semibold text-2xl tracking-tight">{name}</p>
+        <p className="mt-0.5 text-muted-foreground text-xs">
+          Membro desde {formatted}
+        </p>
+      </div>
     </div>
   );
 }

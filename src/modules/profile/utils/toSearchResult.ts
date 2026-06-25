@@ -23,5 +23,6 @@ export function ratedItemToSearchResult(item: TRatedItem): TSearchResult {
   return {
     ...profileItemToSearchResult(item),
     score: item.score,
+    isUserScore: true,
   };
 }
