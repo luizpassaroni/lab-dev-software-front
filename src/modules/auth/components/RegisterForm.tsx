@@ -10,6 +10,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useLogin } from "@/modules/auth/hooks/use-login";
 import { useRegister } from "@/modules/auth/hooks/use-register";
 import {
   emailSchema,
@@ -21,13 +22,25 @@ import {
 export function RegisterForm() {
   const router = useRouter();
   const register = useRegister();
+  const login = useLogin();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm({
     defaultValues: { name: "", email: "", password: "" },
     onSubmit: ({ value }) => {
       register.mutate(value, {
-        onSuccess: () => router.push("/login?just_registered=1"),
+        onSuccess: () => {
+          login.mutate(
+            { email: value.email, password: value.password },
+            {
+              onSuccess: () => {
+                router.push("/");
+                router.refresh();
+              },
+              onError: () => router.push("/login?just_registered=1"),
+            },
+          );
+        },
       });
     },
   });
@@ -185,7 +198,7 @@ export function RegisterForm() {
           <Button
             type="submit"
             className="mt-2 w-full"
-            disabled={!isValid || register.isPending}
+            disabled={!isValid || register.isPending || login.isPending}
           >
             {register.isPending ? (
               <>
