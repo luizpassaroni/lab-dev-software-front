@@ -82,7 +82,9 @@ export function SearchResults({ query, isAuthed }: Props) {
       <div aria-hidden className="search-ambient" />
       <div className="mb-6">
         <p className="text-muted-foreground text-sm">Resultados para</p>
-        <h1 className="font-semibold text-3xl tracking-tight">{query}</h1>
+        <h1 className="break-words font-semibold text-2xl tracking-tight text-pretty sm:text-3xl">
+          {query}
+        </h1>
       </div>
 
       <SearchResultsGrid results={results} favoritedKeys={favoritedKeys} />
@@ -118,7 +120,9 @@ function SearchResultsSkeleton({ query }: { query: string }) {
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
       <div className="mb-6">
         <p className="text-muted-foreground text-sm">Resultados para</p>
-        <h1 className="font-semibold text-3xl tracking-tight">{query}</h1>
+        <h1 className="break-words font-semibold text-2xl tracking-tight text-pretty sm:text-3xl">
+          {query}
+        </h1>
       </div>
       <LoadingState />
     </main>

@@ -139,7 +139,7 @@ export function RatingControl({
               size="sm"
               onClick={handleDelete}
               disabled={isPending}
-              className="text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors"
+              className="min-h-11 text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive sm:min-h-0"
             >
               <Trash2Icon className="mr-2 size-4" />
               Remover
@@ -150,7 +150,7 @@ export function RatingControl({
             onClick={handleSave}
             disabled={isPending || (hasRating && localRating === initialRating)}
             className={cn(
-              "[transition:transform_150ms_cubic-bezier(0.16,1,0.3,1),box-shadow_150ms_ease-out] hover:scale-[1.05] hover:shadow-md active:scale-[0.96]",
+              "min-h-11 [transition:transform_150ms_cubic-bezier(0.16,1,0.3,1),box-shadow_150ms_ease-out] hover:scale-[1.05] hover:shadow-md active:scale-[0.96] sm:min-h-0",
               saveAnim && "animate-action-pop",
             )}
             onAnimationEnd={() => setSaveAnim(false)}
