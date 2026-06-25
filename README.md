@@ -24,6 +24,16 @@ browser:
 | `API_INTERNAL_URL` | URL interna da API Nest (server-to-server) |
 | `INTERNAL_API_KEY` | header `X-Internal-Key` em toda chamada Next → Nest |
 
+## Produção
+
+| Recurso | URL |
+|---|---|
+| Front (Vercel) | <https://lab-dev-software-front.vercel.app> |
+
+As variáveis `API_INTERNAL_URL` e `INTERNAL_API_KEY` estão configuradas
+**server-side na Vercel** (Production), sem prefixo `NEXT_PUBLIC_` — o segredo
+nunca chega ao browser.
+
 ## Camada de dados (BFF)
 
 Cada chamada do browser passa por um route handler `/api/*`, que injeta os
