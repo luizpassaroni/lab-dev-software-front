@@ -6,6 +6,7 @@ export type TSearchResult = {
   posterUrl: string | null;
   badge: "Filme" | "Série";
   score?: number;
+  isUserScore?: boolean;
 };
 
 export type TSearchResponse = {

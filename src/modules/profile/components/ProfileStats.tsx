@@ -6,19 +6,23 @@ type Props = {
 
 export function ProfileStats({ totais }: Props) {
   return (
-    <div className="flex gap-8">
-      <Stat label="Vistos" value={totais.vistos} />
-      <Stat label="Avaliados" value={totais.avaliados} />
-      <Stat label="Favoritos" value={totais.favoritos} />
+    <div className="flex overflow-hidden rounded-lg border bg-muted/40">
+      <StatCell label="Vistos" value={totais.vistos} />
+      <StatCell label="Avaliados" value={totais.avaliados} />
+      <StatCell label="Favoritos" value={totais.favoritos} />
     </div>
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function StatCell({ label, value }: { label: string; value: number }) {
   return (
-    <div className="text-center">
-      <p className="font-semibold text-2xl tabular-nums">{value}</p>
-      <p className="text-muted-foreground text-sm">{label}</p>
+    <div className="flex flex-col items-center justify-center gap-0.5 px-5 py-3 [&:not(:first-child)]:border-l">
+      <span className="text-[1.375rem] font-semibold tabular-nums leading-none">
+        {value}
+      </span>
+      <span className="font-medium text-[0.6875rem] text-muted-foreground">
+        {label}
+      </span>
     </div>
   );
 }
