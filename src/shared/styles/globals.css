@@ -583,6 +583,174 @@
     transition: width 80ms ease-out;
   }
 
+  .auth-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--card) 46%, var(--background)) 0%,
+      var(--background) 72%
+    );
+  }
+
+  .auth-backdrop__wash {
+    position: absolute;
+    inset: -24% -12% auto;
+    height: 520px;
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        oklch(0.82 0.004 80 / 0.18),
+        transparent 52%
+      ),
+      linear-gradient(
+        90deg,
+        transparent,
+        oklch(0.62 0.004 80 / 0.08),
+        transparent
+      );
+    filter: blur(28px);
+    opacity: 0.5;
+  }
+
+  .auth-backdrop__beam {
+    position: absolute;
+    inset: 64px -12% auto;
+    height: 360px;
+    background: linear-gradient(
+      105deg,
+      transparent 16%,
+      oklch(0.72 0.004 80 / 0.1) 44%,
+      oklch(0.56 0.004 80 / 0.08) 54%,
+      transparent 78%
+    );
+    filter: blur(12px);
+    opacity: 0.32;
+    transform: skewY(-5deg);
+  }
+
+  .auth-backdrop__panels {
+    position: absolute;
+    top: 78px;
+    left: 50%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(88px, 1fr));
+    gap: clamp(16px, 4vw, 42px);
+    width: min(780px, calc(100vw - 48px));
+    transform: translateX(-50%);
+    opacity: 0.26;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+  }
+
+  .auth-backdrop__panel {
+    aspect-ratio: 2 / 3;
+    min-height: 260px;
+    border: 1px solid color-mix(in oklch, var(--border) 55%, transparent);
+    border-radius: 10px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--card) 82%, transparent),
+      color-mix(in oklch, var(--background) 72%, transparent)
+    );
+    opacity: 0.34;
+    transform: translateY(calc(var(--i, 0) * 14px));
+    filter: blur(12px) saturate(0.9);
+    animation: ambient-drift 10s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i, 0) * -1.7s);
+  }
+
+  .auth-backdrop__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        transparent 0%,
+        transparent 34%,
+        color-mix(in oklch, var(--background) 58%, transparent) 78%,
+        var(--background) 100%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        color-mix(in oklch, var(--background) 86%, transparent) 66%,
+        var(--background) 100%
+      );
+  }
+
+  .dark .auth-backdrop {
+    background: linear-gradient(
+      180deg,
+      var(--background) 0%,
+      color-mix(in oklch, var(--card) 62%, var(--background)) 48%,
+      var(--background) 100%
+    );
+  }
+
+  .dark .auth-backdrop__wash {
+    background:
+      radial-gradient(
+        ellipse at 50% -12%,
+        color-mix(in oklch, var(--primary) 44%, transparent),
+        transparent 50%
+      ),
+      linear-gradient(
+        90deg,
+        transparent 18%,
+        color-mix(in oklch, var(--accent) 18%, transparent) 50%,
+        transparent 82%
+      );
+    filter: blur(36px);
+    opacity: 0.84;
+  }
+
+  .dark .auth-backdrop__beam {
+    background: linear-gradient(
+      105deg,
+      transparent 15%,
+      oklch(0.96 0.018 75 / 0.1) 44%,
+      color-mix(in oklch, var(--primary) 28%, transparent) 54%,
+      transparent 78%
+    );
+    opacity: 0.72;
+  }
+
+  .dark .auth-backdrop__panel {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--primary) 12%, transparent),
+      color-mix(in oklch, var(--card) 56%, transparent)
+    );
+    opacity: 0.44;
+    filter: blur(12px) saturate(1.15);
+  }
+
+  .dark .auth-backdrop__vignette {
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        transparent 0%,
+        transparent 30%,
+        color-mix(in oklch, var(--background) 74%, transparent) 76%,
+        var(--background) 100%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        color-mix(in oklch, var(--background) 82%, transparent) 66%,
+        var(--background) 100%
+      );
+  }
+
   .title-backdrop {
     position: absolute;
     top: 0;
@@ -642,7 +810,8 @@
   .animate-rating-flip,
   .animate-heart-beat,
   .animate-eye-pop,
-  .home-backdrop__poster {
+  .home-backdrop__poster,
+  .auth-backdrop__panel {
     animation: none;
   }
 
