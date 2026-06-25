@@ -11,29 +11,51 @@ import {
 import { ErrorState } from "@shared/components/ui/ErrorState";
 import { LoadingState } from "@shared/components/ui/LoadingState";
 import { RotateCwIcon, SearchXIcon } from "lucide-react";
+import { useMemo } from "react";
+import { useProfile } from "@/modules/profile/hooks/useProfile";
 import { SearchResultsGrid } from "@/modules/titles/components/SearchResultsGrid";
 import { useDiscover } from "@/modules/titles/hooks/useDiscover";
 
 type Props = {
   genreId: number | null;
+  isAuthed: boolean;
 };
 
 const TRENDING_FALLBACK_GENRE_ID = 28;
 
-export function DiscoverGrid({ genreId }: Props) {
+export function DiscoverGrid({ genreId, isAuthed }: Props) {
+  const { data: profile } = useProfile({ enabled: isAuthed });
+  const favoritedKeys = useMemo(
+    () =>
+      new Set(
+        profile?.favoritos.map((item) => `${item.tmdbType}-${item.tmdbId}`) ??
+          [],
+      ),
+    [profile],
+  );
+
   if (genreId === null) {
-    return <TrendingDiscoverGrid />;
+    return (
+      <TrendingDiscoverGrid favoritedKeys={favoritedKeys} isAuthed={isAuthed} />
+    );
   }
 
   return (
     <DiscoverGridQuery
       genreId={genreId}
       emptyDescription="Nenhum título encontrado para este gênero."
+      favoritedKeys={favoritedKeys}
     />
   );
 }
 
-function TrendingDiscoverGrid() {
+function TrendingDiscoverGrid({
+  favoritedKeys,
+  isAuthed,
+}: {
+  favoritedKeys: Set<string>;
+  isAuthed: boolean;
+}) {
   const query = useDiscover(null);
 
   if (query.isError) {
@@ -41,6 +63,7 @@ function TrendingDiscoverGrid() {
       <DiscoverGridQuery
         genreId={TRENDING_FALLBACK_GENRE_ID}
         emptyDescription="Nenhum título em alta encontrado agora."
+        favoritedKeys={favoritedKeys}
       />
     );
   }
@@ -49,6 +72,7 @@ function TrendingDiscoverGrid() {
     <DiscoverGridView
       query={query}
       emptyDescription="Nenhum título em alta encontrado agora."
+      favoritedKeys={favoritedKeys}
     />
   );
 }
@@ -56,14 +80,17 @@ function TrendingDiscoverGrid() {
 function DiscoverGridQuery({
   genreId,
   emptyDescription,
+  favoritedKeys,
 }: {
   genreId: number;
   emptyDescription: string;
+  favoritedKeys: Set<string>;
 }) {
   return (
     <DiscoverGridView
       query={useDiscover(genreId)}
       emptyDescription={emptyDescription}
+      favoritedKeys={favoritedKeys}
     />
   );
 }
@@ -71,9 +98,11 @@ function DiscoverGridQuery({
 function DiscoverGridView({
   query,
   emptyDescription,
+  favoritedKeys,
 }: {
   query: ReturnType<typeof useDiscover>;
   emptyDescription: string;
+  favoritedKeys: Set<string>;
 }) {
   const {
     data,
@@ -120,7 +149,7 @@ function DiscoverGridView({
 
   return (
     <section className="w-full">
-      <SearchResultsGrid results={results} />
+      <SearchResultsGrid results={results} favoritedKeys={favoritedKeys} />
 
       {hasNextPage ? (
         <div className="mt-8 flex justify-center">
