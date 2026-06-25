@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getMe } from "@/modules/auth/queries/getMe";
 import { HomeBackdrop } from "@/modules/titles/components/HomeBackdrop";
 import { HomeDiscover } from "@/modules/titles/components/HomeDiscover";
 import { HomeSearch } from "@/modules/titles/components/HomeSearch";
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   title: "Início",
 };
 
-export default function Home() {
+export default async function Home() {
+  const user = await getMe();
+
   return (
     <main className="relative flex flex-1 flex-col items-center justify-start overflow-hidden px-4 py-12 sm:py-16">
       <HomeBackdrop />
@@ -28,7 +31,7 @@ export default function Home() {
         <HomeSearch />
       </div>
 
-      <HomeDiscover />
+      <HomeDiscover isAuthed={!!user} />
     </main>
   );
 }

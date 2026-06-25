@@ -5,7 +5,11 @@ import { DiscoverGrid } from "@/modules/titles/components/DiscoverGrid";
 import { GenreChips } from "@/modules/titles/components/GenreChips";
 import { useGenres } from "@/modules/titles/hooks/useGenres";
 
-export function HomeDiscover() {
+type Props = {
+  isAuthed: boolean;
+};
+
+export function HomeDiscover({ isAuthed }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { data: genres } = useGenres();
   const selectedGenre = genres?.find((genre) => genre.id === selectedId);
@@ -23,7 +27,7 @@ export function HomeDiscover() {
       </div>
 
       <div className="mt-5">
-        <DiscoverGrid genreId={selectedId} />
+        <DiscoverGrid genreId={selectedId} isAuthed={isAuthed} />
       </div>
     </section>
   );
