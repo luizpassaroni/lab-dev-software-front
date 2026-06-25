@@ -23,8 +23,10 @@ export function ProfileHeader({ name, createdAt }: Props) {
       <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-semibold text-lg text-primary-foreground">
         {initials}
       </div>
-      <div>
-        <p className="font-semibold text-2xl tracking-tight">{name}</p>
+      <div className="min-w-0">
+        <p className="break-words font-semibold text-2xl tracking-tight">
+          {name}
+        </p>
         <p className="mt-0.5 text-muted-foreground text-xs">
           Membro desde {formatted}
         </p>

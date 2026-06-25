@@ -22,7 +22,7 @@ export function ProfileContent({ user }: Props) {
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
-      <div className="relative mb-10 overflow-hidden rounded-xl border bg-card px-6 py-5">
+      <div className="relative mb-10 overflow-hidden rounded-xl border bg-card px-4 py-5 sm:px-6">
         <div className="search-ambient" />
         <div className="relative z-10 flex flex-wrap items-center gap-5">
           <ProfileHeader name={user.name} createdAt={user.createdAt} />

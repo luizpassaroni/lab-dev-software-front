@@ -25,10 +25,15 @@ const HeaderUser = ({ user }: Props) => {
   if (!user) {
     return (
       <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-        <Button variant="ghost" size="sm" asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="min-h-11 sm:min-h-0"
+          asChild
+        >
           <Link href="/login">Entrar</Link>
         </Button>
-        <Button size="sm" asChild>
+        <Button size="sm" className="min-h-11 sm:min-h-0" asChild>
           <Link href="/cadastro">Cadastrar</Link>
         </Button>
       </div>
@@ -50,7 +55,11 @@ const HeaderUser = ({ user }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="min-h-11 min-w-11 rounded-full sm:min-h-0 sm:min-w-0"
+        >
           <Avatar>
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>

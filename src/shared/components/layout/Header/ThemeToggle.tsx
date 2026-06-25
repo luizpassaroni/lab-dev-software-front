@@ -11,7 +11,7 @@ const ThemeToggle = () => {
     <Button
       variant="ghost"
       size="icon"
-      className="group rounded-full"
+      className="group min-h-11 min-w-11 rounded-full sm:min-h-0 sm:min-w-0"
       aria-label="Alternar tema"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >

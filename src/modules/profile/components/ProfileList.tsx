@@ -48,7 +48,7 @@ export function ProfileList({ title, count, results }: Props) {
             <EmptyDescription>{empty.description}</EmptyDescription>
             <Link
               href="/"
-              className="mt-1 inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="mt-1 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Explorar catálogo
             </Link>

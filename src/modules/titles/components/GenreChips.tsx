@@ -26,7 +26,7 @@ export function GenreChips({ selectedId, onSelect }: Props) {
         type="button"
         variant={selectedId === null ? "default" : "outline"}
         size="sm"
-        className="transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_color-mix(in_oklch,var(--ring)_45%,transparent)]"
+        className="min-h-11 transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_color-mix(in_oklch,var(--ring)_45%,transparent)] sm:min-h-0"
         aria-pressed={selectedId === null}
         onClick={() => onSelect(null)}
       >
@@ -40,7 +40,7 @@ export function GenreChips({ selectedId, onSelect }: Props) {
             type="button"
             variant={active ? "default" : "outline"}
             size="sm"
-            className="transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_color-mix(in_oklch,var(--ring)_45%,transparent)]"
+            className="min-h-11 transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:scale-[1.02] aria-pressed:shadow-[0_0_0_1px_color-mix(in_oklch,var(--ring)_45%,transparent)] sm:min-h-0"
             aria-pressed={active}
             onClick={() => onSelect(active ? null : genre.id)}
           >
